@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pxxy.bigData.mapper.CollectionMapper">
+  <resultMap id="BaseResultMap" type="com.pxxy.bigData.bean.Collection">
+    <id column="colloction _id" jdbcType="INTEGER" property="colloctionId" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="course_id" jdbcType="INTEGER" property="courseId" />
+    <result column="createTime" jdbcType="DATE" property="createtime" />
+    <result column="endTime" jdbcType="DATE" property="endtime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    "colloction _id", user_id, course_id, createTime, endTime
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_collection
+    where "colloction _id" = #{colloctionId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_collection
+    where "colloction _id" = #{colloctionId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.pxxy.bigData.bean.Collection">
+    insert into t_collection ("colloction _id", user_id, course_id, 
+      createTime, endTime)
+    values (#{colloctionId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{courseId,jdbcType=INTEGER}, 
+      #{createtime,jdbcType=DATE}, #{endtime,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.pxxy.bigData.bean.Collection">
+    insert into t_collection
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="colloctionId != null">
+        "colloction _id",
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="courseId != null">
+        course_id,
+      </if>
+      <if test="createtime != null">
+        createTime,
+      </if>
+      <if test="endtime != null">
+        endTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="colloctionId != null">
+        #{colloctionId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="courseId != null">
+        #{courseId,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=DATE},
+      </if>
+      <if test="endtime != null">
+        #{endtime,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pxxy.bigData.bean.Collection">
+    update t_collection
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="courseId != null">
+        course_id = #{courseId,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        createTime = #{createtime,jdbcType=DATE},
+      </if>
+      <if test="endtime != null">
+        endTime = #{endtime,jdbcType=DATE},
+      </if>
+    </set>
+    where "colloction _id" = #{colloctionId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pxxy.bigData.bean.Collection">
+    update t_collection
+    set user_id = #{userId,jdbcType=INTEGER},
+      course_id = #{courseId,jdbcType=INTEGER},
+      createTime = #{createtime,jdbcType=DATE},
+      endTime = #{endtime,jdbcType=DATE}
+    where "colloction _id" = #{colloctionId,jdbcType=INTEGER}
+  </update>
+  <insert id="insertBySelective" parameterType="java.lang.Integer">
+    		insert into t_collection (user_id, course_id)
+   		 values (#{userId,jdbcType=INTEGER}, #{courseId,jdbcType=INTEGER})
+  	</insert>
+</mapper>

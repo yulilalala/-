@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script type="text/javascript" src="../js/u-jquery-1.12.3.js"></script>
+    <link rel="stylesheet" href="../css/u-bootstrap.min.css">
+    <script type="text/javascript" src="../js/u-bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../css/login.css">
+    <!-- <script type="text/javascript" src="../js/login.js"></script> -->
+    <title>欢迎登录</title>
+</head>
+<body>
+    <div class="center-block lg-container"> 
+        <h3 class="text-center">您好，欢迎登录！</h3>
+        <div class="lg-cj">
+            <div class="form-horizontal col-sm-offset-2 col-md-offset-2">
+                <div class="form-group">
+                    <div class="from-wrap col-sm-8">
+                        <i class="icon1 glyphicon glyphicon-user"></i>
+                        <input type="text" id="userName"  placeholder="用户名"/>
+                    </div>
+                </div>
+                <div class="from-wrap form-group">
+                        <div class="col-sm-8">
+                            <i class="icon2 glyphicon glyphicon-lock"></i>
+                            <input type="password" id="userPsw" placeholder="密码"/>
+                        </div>
+                </div>
+                <div id="errorBox"></div>
+                <div class="form-group">
+					<input type="submit" class="btn btn-success lg-button  form-control" onclick="fnLogin()" value="登录 "/>   
+                </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+    	function fnLogin(){
+    		var username=$("#userName").val();
+    		var password=$("#userPsw").val();
+    		$.ajax({
+                url: 'admin/login',
+    			method: 'get',
+                data: {
+                    "username":username,
+                    "password":password
+                },
+                success: function (result) {
+                	if(result.code==100){
+                		window.location.href = '/main';
+                	}
+                	else{
+                		alert(result.map.msg);
+                	}
+                }
+    		});
+    	}
+    </script>
+</body>
+</html>

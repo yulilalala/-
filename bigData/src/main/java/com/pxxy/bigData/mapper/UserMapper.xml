@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pxxy.bigData.mapper.UserMapper">
+  <resultMap id="BaseResultMap" type="com.pxxy.bigData.bean.User">
+    <id column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="gender" jdbcType="CHAR" property="gender" />
+    <result column="province_id" jdbcType="INTEGER" property="provinceId" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="birthday" jdbcType="DATE" property="birthday" />
+    <result column="createTime" jdbcType="DATE" property="createtime" />
+    <result column="modifyTime" jdbcType="DATE" property="modifytime" />
+    <result column="college" jdbcType="VARCHAR" property="college" />
+    <association property="province" javaType="com.pxxy.bigData.bean.Province">
+    	<id property="provinceId" column="province_id"/>
+    	<result property="provinceCode" column="province_code"/>
+    	<result property="provinceName" column="province_name"/>
+    </association>
+  </resultMap>
+  <sql id="Base_Column_List">
+    user_id, username, password, email, gender, province_id, status, birthday, createTime, 
+    modifyTime, college
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_user
+    where user_id = #{userId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_user
+    where user_id = #{userId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.pxxy.bigData.bean.User">
+    insert into t_user (user_id, username, password, 
+      email, gender, province_id, 
+      status, birthday, createTime, 
+      modifyTime, college)
+    values (#{userId,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{gender,jdbcType=CHAR}, #{provinceId,jdbcType=INTEGER}, 
+      #{status,jdbcType=INTEGER}, #{birthday,jdbcType=DATE}, #{createtime,jdbcType=DATE}, 
+      #{modifytime,jdbcType=DATE}, #{college,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.pxxy.bigData.bean.User">
+    insert into t_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="username != null">
+        username,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="gender != null">
+        gender,
+      </if>
+      <if test="provinceId != null">
+        province_id,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="birthday != null">
+        birthday,
+      </if>
+      <if test="createtime != null">
+        createTime,
+      </if>
+      <if test="modifytime != null">
+        modifyTime,
+      </if>
+      <if test="college != null">
+        college,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null">
+        #{gender,jdbcType=CHAR},
+      </if>
+      <if test="provinceId != null">
+        #{provinceId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="birthday != null">
+        #{birthday,jdbcType=DATE},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=DATE},
+      </if>
+      <if test="modifytime != null">
+        #{modifytime,jdbcType=DATE},
+      </if>
+      <if test="college != null">
+        #{college,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pxxy.bigData.bean.User">
+    update t_user
+    <set>
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null">
+        gender = #{gender,jdbcType=CHAR},
+      </if>
+      <if test="provinceId != null">
+        province_id = #{provinceId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="birthday != null">
+        birthday = #{birthday,jdbcType=DATE},
+      </if>
+      <if test="createtime != null">
+        createTime = #{createtime,jdbcType=DATE},
+      </if>
+      <if test="modifytime != null">
+        modifyTime = #{modifytime,jdbcType=DATE},
+      </if>
+      <if test="college != null">
+        college = #{college,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pxxy.bigData.bean.User">
+    update t_user
+    set username = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      gender = #{gender,jdbcType=CHAR},
+      province_id = #{provinceId,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      birthday = #{birthday,jdbcType=DATE},
+      createTime = #{createtime,jdbcType=DATE},
+      modifyTime = #{modifytime,jdbcType=DATE},
+      college = #{college,jdbcType=VARCHAR}
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+  <select id="selectAllUser" resultMap="BaseResultMap">
+  	select 
+     	u.*,p.province_name
+    from t_user u left join t_province p on u.province_id=p.province_id
+  </select>
+  <select id="selectByUserName" parameterType="String" resultMap="BaseResultMap">
+  	select 
+    <include refid="Base_Column_List" />
+    from t_user where username=#{username,jdbcType=VARCHAR}
+ </select>
+ <select id="selectUser" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  	select 
+     	u.*,p.province_name
+    from t_user u left join t_province p on u.province_id=p.province_id
+    where user_id = #{userId,jdbcType=INTEGER}
+  </select>
+  <update id="updateByNameSelective" parameterType="com.pxxy.bigData.bean.User">
+    update t_user
+    <set>
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null">
+        gender = #{gender,jdbcType=CHAR},
+      </if>
+      <if test="provinceId != null">
+        province_id = #{provinceId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="birthday != null">
+        birthday = #{birthday,jdbcType=DATE},
+      </if>
+      <if test="createtime != null">
+        createTime = #{createtime,jdbcType=DATE},
+      </if>
+      <if test="modifytime != null">
+        modifyTime = #{modifytime,jdbcType=DATE},
+      </if>
+      <if test="college != null">
+        college = #{college,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where username = #{username,jdbcType=VARCHAR}
+  </update>
+  <select id="search" parameterType="java.lang.String" resultMap="BaseResultMap">
+ 	select 
+     	u.*,p.province_name
+    	from t_user u left join t_province p on u.province_id=p.province_id
+		WHERE username like CONCAT('%',#{keywords,jdbcType=VARCHAR},'%')
+  	</select>
+</mapper>

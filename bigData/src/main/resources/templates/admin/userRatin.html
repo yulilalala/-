@@ -1,0 +1,190 @@
+罗辉 2019/6/18 9:59:40
+<!DOCTYPE html>
+<!-- saved from url=(0053)https://getbootstrap.com/docs/4.3/examples/dashboard/ -->
+<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta name="description" content="">
+		<meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+		<meta name="generator" content="Jekyll v3.8.5">
+		<title>用户性别对比</title>
+
+		<!-- <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/dashboard/"> -->
+
+		<!-- Bootstrap core CSS -->
+		
+		<link href="../css/bootstrap.min.css" rel="stylesheet">
+
+		<link href="../css/dashboard.css" rel="stylesheet">
+	</head>
+	<body>
+<!--		引入抽取的topbar-->
+    <div th:replace="commons/bar::topbar"></div>
+		<div class="container-fluid">
+			<div class="row">
+				<!--				引入侧边栏-->
+                <div th:replace="~{commons/bar::#sidebar(activeUri='userRatin.html')}"></div>
+
+				<main role="main" id="main" class="col-md-9 ml-sm-auto col-lg-10 px-4" >
+
+					<canvas id="myChart" width="1522" height="642" style="display: block; height: 514px; width: 1218px;"></canvas>
+					<button type="button" id="exportBtn">导出数据</button>
+					<!-- <div class="table-responsive">
+					</div> -->
+				</main>
+			</div>
+		</div>
+		<script type="text/javascript" src="../js/jquery-1.12.4.js"></script>
+		<script src="../js/bootstrap.bundle.min.js"></script>
+		<script src="../js/echarts.js"></script>
+		<script type="text/javascript">
+		//获取数据
+		var xcourse=[];
+		var ymcount=[];
+		var yfcount=[];
+		$.ajax({
+			url:"/course/showGender",
+			type:"post",
+			success:function(result){
+				if(result.code==100){
+					$.each(result.map.list,function(){
+						var isExist=false;
+						for(var i=0; i<xcourse.length; i++){
+							if(xcourse[i]==this.course_name){
+								isExist=true;
+								break;
+							}
+						}
+						if(!isExist){
+							xcourse.push(this.course_name);
+						}
+					});
+					for(var i=0; i<xcourse.length; i++){
+						ymcount.push[0];
+						yfcount.push[0];
+					}
+					
+					for(var i=0; i<xcourse.length; i++){
+						$.each(result.map.list,function(){
+							if(this.course_name==xcourse[i]){
+								if(this.gender=='M'){
+									ymcount[i]=this.count;
+								}else if(this.gender=='F'){
+									yfcount[i]=this.count;
+								}
+							}
+							
+						});
+					
+					}
+						var myChart; 
+						if (myChart != null && myChart != "" && myChart != undefined) {
+					        myChart.dispose();
+					    }
+						// 基于准备好的dom，初始化echarts实例
+						myChart = echarts.init(document.getElementById('myChart'));
+						$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+						    myChart.resize(); 
+						});
+						// 指定图表的配置项和数据
+						var option = {
+							title: {
+								text: '用户课程-性别对比'
+							},
+							color: ['#3398DB','red'],
+							tooltip : {
+						        trigger: 'axis',
+						        axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+						            type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+						        }
+						    },
+							legend: {
+							      data: ['男', '女'],
+							},
+							calculable: true,
+							xAxis: {
+								data: xcourse,
+					            axisLabel : {//坐标轴刻度标签的相关设置。
+						            fontSize:16,
+									interval: 0,  
+									formatter:function(value)  
+		                               {  
+                                         var ret = "";//拼接加\n返回的类目项  
+                                         var maxLength = 4;//每项显示文字个数  
+                                         var valLength = value.length;//X轴类目项的文字个数  
+                                         var rowN = Math.ceil(valLength / maxLength); //类目项需要换行的行数  
+                                         if (rowN > 1)//如果类目项的文字大于3,  
+                                         {  
+                                             for (var i = 0; i < rowN; i++) {  
+                                                 var temp = "";//每次截取的字符串  
+                                                 var start = i * maxLength;//开始截取的位置  
+                                                 var end = start + maxLength;//结束截取的位置  
+                                                 //这里也可以加一个是否是最后一行的判断，但是不加也没有影响，那就不加吧  
+                                                 temp = value.substring(start, end) + "\n";  
+                                                 ret += temp; //凭借最终的字符串  
+                                             }  
+                                             return ret;  
+                                         }  
+                                         else {  
+                                             return value;  
+                                         }    
+		                               }  
+					            }
+							},
+							yAxis:[
+						        {
+						            type : 'value'
+						        }
+						    ],
+							series: [{
+								barWidth : 30,
+								name: '男',
+								type: 'bar',
+								data: ymcount,
+								itemStyle: {
+									normal: {
+										label: {
+											show: true, //开启显示
+											position: 'top', //在上方显示
+											textStyle: { //数值样式
+												color: 'black',
+												fontSize: 16
+											}
+										}
+									}
+								},
+							},
+							{
+								barWidth : 30,
+								name: '女',
+								type: 'bar',
+								data: yfcount,
+								itemStyle: {
+									normal: {
+										label: {
+											show: true, //开启显示
+											position: 'top', //在上方显示
+											textStyle: { //数值样式
+												color: 'black',
+												fontSize: 16
+											}
+										}
+									}
+								},
+							}]
+						};
+						// 使用刚指定的配置项和数据显示图表。
+						myChart.setOption(option);
+				}
+				
+			}	
+		}); 
+		$("#exportBtn").click(function(){
+			window.location.href='/exporCourseInfoExcels';
+		});
+			</script>
+	</body>
+</html>

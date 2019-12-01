@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script type="text/javascript" src="../lib/u-jquery-1.12.3.js"></script>
+    <link rel="stylesheet" href="../lib/u-bootstrap.min.css">
+    <script type="text/javascript" src="../lib/u-bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../css/login.css">
+    <script type="text/javascript" src="../js/login.js"></script>
+    <title>欢迎登录</title>
+    <!-- <script type="text/javascript">
+        function fnLogin() {
+        var oUname = document.getElementById("userName")
+        var oUpass = document.getElementById("userPsw")
+        var oError = document.getElementById("errorBox")
+        var isError = true;
+        if (oUname.value.length > 20 || oUname.value.length < 6) {
+         oError.innerHTML = "用户名请输入6-20位字符";
+         isError = false;
+         return;
+        }else if((oUname.value.charCodeAt(0)>=48) && (oUname.value.charCodeAt(0)<=57)){
+         oError.innerHTML = "首字符必须为字母";
+         return;
+        }else for(var i=0;i<oUname.value.charCodeAt(i);i++){
+         if((oUname.value.charCodeAt(i)<48)||(oUname.value.charCodeAt(i)>57) && (oUname.value.charCodeAt(i)<97)||(oUname.value.charCodeAt(i)>122)){
+          oError.innerHTML = "必须为字母和数字组成";
+          return;
+         }
+        }        
+        if (oUpass.value.length > 20 || oUpass.value.length < 6) {
+         oError.innerHTML = "密码请输入6-20位字符"
+         isError = false;
+         return;
+        }
+        window.alert("登录成功")
+       }
+    </script> -->
+</head>
+<body>
+    <div class="center-block lg-container"> 
+        <h3 class="text-center">您好，欢迎登录！</h3>
+        <div class="lg-cj">
+            <div class="form-horizontal col-sm-offset-2 col-md-offset-2">
+                <div class="form-group">
+                    <div class="from-wrap col-sm-8">
+                        <i class="icon1 glyphicon glyphicon-user"></i>
+                        <input type="text" id="userName"  placeholder="用户名"/>
+                    </div>
+                </div>
+                <div class="from-wrap form-group">
+                        <div class="col-sm-8">
+                            <i class="icon2 glyphicon glyphicon-lock"></i>
+                            <input type="password" id="userPsw" placeholder="密码"/>
+                        </div>
+                </div>
+                <div id="errorBox"></div>
+                <div class="form-group">
+					<input type="submit" class="btn btn-success lg-button  form-control" onclick="fnLogin()" value="登录 "/>   
+                </div>
+        </div>
+    </div>
+    
+</body>
+</html>

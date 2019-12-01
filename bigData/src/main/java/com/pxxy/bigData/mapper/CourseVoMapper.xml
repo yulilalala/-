@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pxxy.bigData.mapper.CourseVoMapper">
+	<select id = "getCourseInfo" resultType="com.pxxy.bigData.bean.CourseVo">
+  		select c.course_id courseId,c.course_name courseName,c.course_introduction courseIntroduction,t.teacher_name teacherName,c.course_img_url courseImgUrl,c.classify_id classifyId,v.video_url videoUrl,c.uploadDate,c.praiseCount,c.classic,count(*) praisesCount
+		from t_course c
+		LEFT JOIN t_praise p on p.course_id=c.course_id 
+		LEFT JOIN t_teacher t on t.teacher_id=c.teacher_id
+		LEFT JOIN t_video v on v.video_id = c.video_id
+		where c.course_id=#{courseId,jdbcType=INTEGER}
+		GROUP BY c.course_id,c.course_name,c.course_introduction,t.teacher_name,c.course_img_url,c.classify_id,v.video_url,c.uploadDate,c.praiseCount,c.classic
+   </select>
+</mapper>

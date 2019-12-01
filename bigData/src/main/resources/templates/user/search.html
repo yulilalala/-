@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>100分勤学网---搜索页</title>
+    <script type="text/javascript" src="../js/u-jquery-1.12.3.js"></script>
+    <script type="text/javascript" src="../js/u-bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../css/u-bootstrap.min.css">
+    <link rel="stylesheet" href="../css/search.css">
+    <script type="text/javascript" src="../js/public.js"></script>
+    <link rel="stylesheet" href="../css/public.css">
+    <script type="text/javascript" src="../js/index.js"></script>
+    <!-- <link rel="stylesheet" href="../../css/course.css"> -->
+    <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon" />
+</head>
+
+<body>
+    <div id="page">
+        <!-- 头部 -->
+        <div class="headerpage" th:replace="commons/header::page2-header"></div>
+        <div class="w">
+            <!-- 中间 -->
+            <div class="sea-container">
+                <div class="sea-classify">
+                    <span class="classify-txt">
+                        分类：
+                    </span>
+                    <span class="classify-tit" id="classify-tit">
+                        <a href="search.html?id=1">web前端</a>
+                        <a href="search.html?id=2">C#/.Net</a>
+                        <!-- <a class="active4" href="search.html?id=3">C/C++</a> -->
+                        <a href="search.html?id=3">C/C++</a>
+                        <a href="search.html?id=4">Java</a>
+                        <a href="search.html?id=5">PHP</a>
+                        <a href="search.html?id=6">Python</a>
+                        <a href="search.html?id=7">大数据</a>
+                        <a href="search.html?id=8">Linux云计算</a>
+                        <a href="search.html?id=9">Android</a>
+                        <a href="search.html?id=10">IOS</a>
+                        <a href="search.html?id=11">Unity3D</a>
+                    </span>
+                </div>
+
+                <div class="sea-course" id="sea-course">
+                    <ul class="md-bd" id="searchUl">
+                        <!-- <li class="pics-box pull-left">
+                            <a href="#">
+                                <img src="../../images/zb1.png">
+                                <h4>
+                                    <span class="pics-tit">
+                                        jenkins技术应用
+                                    </span>
+                                </h4>
+                            </a>
+                        </li> -->
+                        <!-- <div style="clear: both"></div>  -->
+                        <!-- <li class="pics-box pull-left">
+                            <a href="#">
+                                <img src="../../images/zb1.png">
+                                <h4>
+                                    <span class="pics-tit">
+                                        jenkins技术应用
+                                    </span>
+                                </h4>
+                            </a>
+
+                        </li>
+                        <li class="pics-box pull-left">
+                            <a href="#">
+                                <img src="../../images/zb1.png">
+                                <h4>
+                                    <span class="pics-tit">
+                                        jenkins技术应用
+                                    </span>
+                                </h4>
+                            </a>
+                        </li>
+                        <li class="pics-box pull-left">
+                            <a href="#">
+                                <img src="../../images/zb1.png">
+                                <h4>
+                                    <span class="pics-tit">
+                                        jenkins技术应用
+                                    </span>
+                                </h4>
+                            </a>
+                        </li>
+                        <li class="pics-box pull-left">
+                            <a href="#">
+                                <img src="../../images/zb1.png">
+                                <h4>
+                                    <span class="pics-tit">
+                                        jenkins技术应用
+                                    </span>
+                                </h4>
+                            </a>
+                        </li>
+                        <li class="pics-box pull-left">
+                            <a href="#">
+                                <img src="../../images/zb1.png">
+                                <h4>
+                                    <span class="pics-tit">
+                                        jenkins技术应用
+                                    </span>
+                                </h4>
+                            </a>
+                        </li>
+                        <li class="pics-box pull-left">
+                            <a href="#">
+                                <img src="../../images/zb1.png">
+                                <h4>
+                                    <span class="pics-tit">
+                                        jenkins技术应用
+                                    </span>
+                                </h4>
+                            </a>
+                        </li>
+                        <li class="pics-box pull-left">
+                            <a href="#">
+                                <img src="../../images/zb1.png">
+                                <h4>
+                                    <span class="pics-tit">
+                                        jenkins技术应用
+                                    </span>
+                                </h4>
+                            </a>
+                        </li>
+                        <li class="pics-box pull-left">
+                            <a href="#">
+                                <img src="../../images/zb1.png">
+                                <h4>
+                                    <span class="pics-tit">
+                                        jenkins技术应用
+                                    </span>
+                                </h4>
+                            </a>
+                        </li> -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- 尾部 -->
+        <div class="footerpage" th:replace="commons/footer::footer"></div>
+    </div>
+
+    <script>
+        // 分类
+        var url = decodeURI(window.location.href)
+        res = url.split('=')[1]
+        // console.log(url.split('=')[1])
+        
+        if(!isNaN(res)){
+        	 $.ajax({
+                 method: 'get',
+                 url: '/course/getClassify',
+                 data: {
+                     "classifyId": res
+                 },
+                 dataType: 'json',
+                 success: function (result) {
+                     if (result.code == 100) {
+                         $.each(result.map.classify, function () {
+                             var sId = this.courseId;
+                             var sImg = this.courseImgUrl;
+                             var sName = this.courseName;
+                             var li = $('<li></li>').addClass('pics-box pull-left');
+                             var a = $('<a></a>').attr('href', 'courseDetail.html?id=' + sId);
+                             var img = $('<img></img>').attr('src', '../images/' + sImg);
+                             var h4 = $('<h4></h4>')
+                             var span = $('<span></span>').append(sName).addClass('pics-tit');
+                             h4.append(span);
+                             a.append(img).append(h4);
+                             li.append(a);
+                             $('#searchUl').append(li)
+                         })
+                     }
+                 }
+             })
+        }else{
+        	//搜索
+    		$.ajax({
+                        url: '/course/search',
+                        type: 'get',
+                        data: {
+                            "input": res
+                        },
+                        dataType: 'json',
+                        success: function (res) {
+                       
+                        
+                            if (res.code == 100) {
+                           
+                                if (res.map.result.length != 0) {
+                               
+                             	$('#searchUl').empty();
+                                    $.each(res.map.result, function () {
+                                        var contentId = this.courseId;
+                                        var contentName = this.courseName;
+                                        var contenrUrl = this.courseImgUrl;
+                                        var liEle = $('<li></li>').addClass('pics-box pull-left');
+                                        var aEle = $('<a></a>').attr('href', 'courseDetail.html?id=' + contentId);
+                                        var imgEle = $('<img></img>').attr('src', '../images/' + contenrUrl);
+                                        var h4Ele = $('<h4></h4>')
+                                        var spanEle = $('<span></span>').append(contentName).addClass('pics-tit');
+                                        h4Ele.append(spanEle);
+                                        aEle.append(imgEle).append(h4Ele);
+                                        liEle.append(aEle);
+                                        $('#searchUl').append(liEle);
+                                    })
+                                } else {
+                                	var msg = $('<h1></h1>').append('暂无相关课程').css('text-align', 'center');
+                                    var myLi=$('<li></li>').append(msg);
+                                    $('#searchUl').append(myLi);
+
+                                }
+                            }
+                        }
+                    })
+
+        }
+        
+       
+
+        
+
+        
+
+    </script>
+</body>
+
+</html>

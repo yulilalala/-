@@ -1,0 +1,65 @@
+body{
+    background-color:  rgb(243, 243, 241);
+}
+.introduction .theme{
+    width: 1600px;
+    height:200px;
+}
+.introduction .theme img{
+    width: 100%;
+    height:100%;
+}
+
+.advantage{
+    margin-left: 215px;
+    /* margin: 0 auto; */
+    width: 1200px;
+    height: 400px;
+    /* background-color: yellow; */
+}
+.advantage ul{
+    /* float: left; */
+}
+.advantage ul li{
+    float: left;
+    margin-right: 10px;
+    margin-top: 10px;
+    list-style: none;
+}
+.advantage ul li img{
+    width: 370px;
+    height: 130px;
+}
+.advantage .ad-tit{
+    height: 70px;
+    line-height: 70px;
+    font-size: 22px;
+    color: blue;
+    letter-spacing: 3px;
+}
+.intro-detail{
+    /* height: 600px; */
+    width: 1140px;
+    /* margin:0 auto; */
+    margin-left: 215px;
+    /* background-color: rgb(126, 216, 219); */
+}
+.bottom-img{
+    width: 1140px;
+    height: 240px;
+    /* margin: 0px auto; */
+    margin-top: 40px;
+}
+.bottom-img img{
+    width: 100%;
+    height: 100%;
+}
+.intro-detail h3{
+    line-height: 60px;
+    font-weight: 800;
+    letter-spacing: 6px;
+}
+.intro-detail p{
+    font-size: 18px;
+    line-height: 40px;
+}

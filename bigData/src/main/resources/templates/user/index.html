@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>100分勤学网---主页</title>
+	<script type="text/javascript" src="../js/u-jquery-1.12.3.js"></script>
+	<link rel="stylesheet" href="../css/u-bootstrap.min.css">
+	<script type="text/javascript" src="../js/u-bootstrap.min.js"></script>
+	<link rel="stylesheet" href="../css/index.css">
+	<link rel="stylesheet" href="../css/public.css">
+	<script type="text/javascript" src="../js/public.js"></script>
+	<script type="text/javascript" src="../js/index.js"></script>
+	<link rel="shortcut icon" href="../images/favicon.ico" type="images/x-icon" />
+
+</head>
+
+<body>
+	<div id="page">
+		<!-- 页面头部 -->
+		<div class="headerpage" th:replace="commons/header::page2-header">
+			
+		</div>
+		<div class="w">
+			<!--页面中间内容 -->
+			<div class="page-con" id="test">
+				<!-- 轮播图部分 -->
+				<div class="container">
+					<div class="banner-box">
+						<!-- 左侧菜单栏 -->
+						<div class="menu-con pull-left">
+							<ul class="menu-list" id="control_menu">
+								<li class="sub">
+									<a href="#" class="sub-item">
+										<span>
+											前端/后端开发
+										</span>
+										<i class="glyphicon glyphicon-chevron-right"></i>
+									</a>
+									<div class="item" style="display:none">
+										<div class="course-list">
+											<div class="course-item">
+												<p>
+													<a href="javascript:;">前端开发</a>
+												</p>
+												<div class="c-l">
+													<a href="./search.html?id=1">web前端</a>
+												</div>
+											</div>
+											<div class="course-item">
+												<p>
+													<a href="#">后端开发</a>
+												</p>
+												<div class="c-l">
+													<a href="./search.html?id=2">C#/.Net</a>
+													<a href="./search.html?id=3">C/C++</a>
+													<a href="./search.html?id=J4">Java</a>
+													<a href="./search.html?id=5">PHP</a>
+													<a href="./search.html?id=6">Python</a>
+												</div>
+											</div>
+										</div>
+										<div>
+
+								</li>
+								<li class="sub">
+									<a href="#" class="sub-item">
+										<span>
+											大数据/云计算
+										</span>
+										<i class="glyphicon glyphicon-chevron-right"></i>
+									</a>
+									<div class="item" style="display:none">
+										<div class="course-list">
+											<div class="course-item">
+												<p>
+													<a href="javascript:;">大数据</a>
+												</p>
+												<div class="c-l">
+													<a href="./search.html?id=7">大数据</a>
+												</div>
+											</div>
+											<div class="course-item">
+												<p>
+													<a href="javascript:;">云计算</a>
+												</p>
+												<div class="c-l">
+													<a href="./search.html?id=8">Linux云计算</a>
+												</div>
+											</div>
+										</div>
+										<div>
+
+								</li>
+								<li class="sub">
+									<a href="#" class="sub-item">
+										<span>
+											移动开发/游戏
+										</span>
+										<i class="glyphicon glyphicon-chevron-right"></i>
+									</a>
+									<div class="item" style="display:none">
+										<div class="course-list">
+											<div class="course-item">
+												<p>
+													<a href="javascript:;">移动开发</a>
+												</p>
+												<div class="c-l">
+													<a href="./search.html?id=9">Android</a>
+													<a href="./search.html?id=10">IOS</a>
+												</div>
+											</div>
+											<div class="course-item">
+												<p>
+													<a href="javascript:;">游戏</a>
+												</p>
+												<div class="c-l">
+													<a href="./search.html?id=11">Unity3D</a>
+													<!-- <a href="#">C/C++</a>
+												<a href="#">Java</a>
+												<a href="#">PHP</a>
+												<a href="#">Python</a> -->
+												</div>
+											</div>
+										</div>
+										<div>
+								</li>
+								<li class="sub">
+									<a href="#" class="sub-item">
+										<span>
+											物联网/测试
+										</span>
+										<i class="glyphicon glyphicon-chevron-right"></i>
+									</a>
+									<div class="item" style="display:none">
+										<div class="course-list">
+											<div class="course-item">
+												<p>
+													<a href="javascript:;">物联网</a>
+												</p>
+												<div class="c-l">
+													<a href="./search.html?id=12">嵌入式</a>
+												</div>
+											</div>
+											<div class="course-item">
+												<p>
+													<a href="javascript:;">测试</a>
+												</p>
+												<div class="c-l">
+													<a href="./search.html?id=13">软件测试</a>
+													<!-- <a href="#">C/C++</a>
+												<a href="#">Java</a>
+												<a href="#">PHP</a>
+												<a href="#">Python</a> -->
+												</div>
+											</div>
+										</div>
+										<div>
+								</li>
+								<li class="sub">
+									<a href="#" class="sub-item">
+										<span>
+											营销/产品
+										</span>
+										<i class="glyphicon glyphicon-chevron-right"></i>
+									</a>
+									<div class="item" style="display:none">
+										<div class="course-list">
+											<div class="course-item">
+												<p>
+													<a href="javascript:;">营销</a>
+												</p>
+												<div class="c-l">
+													<a href="./search.html?id=14">网络营销</a>
+												</div>
+											</div>
+											<div class="course-item">
+												<p>
+													<a href="javascript:;">产品</a>
+												</p>
+												<div class="c-l">
+													<a href="./search.html?id=15">产品经理</a>
+													<!-- <a href="#">C/C++</a>
+												<a href="#">Java</a>
+												<a href="#">PHP</a>
+												<a href="#">Python</a> -->
+												</div>
+											</div>
+										</div>
+										<div>
+								</li>
+								<li class="sub">
+									<a href="javascrip
+									t:;" class="sub-item">
+										<span>
+											数字艺术
+										</span>
+										<i class="glyphicon glyphicon-chevron-right"></i>
+									</a>
+									<div class="item" style="display:none">
+										<div class="course-list">
+											<div class="course-item">
+												<p>
+													<a href="javascript:;">数字艺术</a>
+												</p>
+												<div class="c-l">
+													<a href="search.html?id=16">UED设计</a>
+													<a href="./search.html?id=17">UID设计</a>
+												</div>
+											</div>
+											<!-- <div class="course-item">
+											<p>
+												<a href="#">后端开发</a>
+											</p>
+											<div class="c-l">
+												<a href="#">C#/.Net</a>
+												<a href="#">C/C++</a>
+												<a href="#">Java</a>
+												<a href="#">PHP</a>
+												<a href="#">Python</a>
+											</div>
+										</div> -->
+										</div>
+										<div>
+								</li>
+							</ul>
+						</div>
+						<!-- 右侧轮播图区 -->
+						<div class="banner-con pull-left">
+							<div class="carousel slide" id="slide" data-ride="carousel" data-interval="2000"
+								data-wrap="true">
+								<!--轮播图的小圆点-->
+								<ol class="carousel-indicators">
+									<li data-target="#slide" data-slide-to="0" class="active"></li>
+									<li data-target="#slide" data-slide-to="1"></li>
+									<li data-target="#slide" data-slide-to="2"></li>
+								</ol>
+								<!--整个轮播图的div-->
+								<div class="carousel-inner">
+									<div class="item active">
+										<a href="courseDetail.html?id=10">
+											<img src="../images/lun1.jpg" style="height: 420px; width:880px">
+										</a>
+										<div class="carousel-caption">
+
+										</div>
+									</div>
+									<div class="item">
+										<a href="courseDetail.html?id=11">
+											<img src="../images/lun2.jpg" style="height: 420px; width:880px">
+										</a>
+										<div class="carousel-caption">
+										</div>
+									</div>
+									<div class="item">
+										<a href="courseDetail.html?id=4">
+											<img src="../images/lun3.jpg" style="height: 420px; width:880px">
+										</a>
+										<!-- 图上文字 -->
+										<div class="carousel-caption">
+
+										</div>
+									</div>
+								</div>
+								<!-- 轮播图上的向前一图切换链接 -->
+								<a href="#slide" data-slide="prev" class="left carousel-control">
+									<span class="glyphicon glyphicon-chevron-left"></span>
+								</a>
+								<!-- 轮播图上的向后一图切换链接 -->
+								<a href="#slide" data-slide="next" class="right carousel-control">
+									<span class="glyphicon glyphicon-chevron-right"></span>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- 经典课程部分 -->
+				<div class="md-container">
+					<span class="more">
+						<a href="course.html">查看更多 >></a>
+					</span>
+					<div class="md-com-list">
+						<div class="md-hd">
+							<div class="pull-left">
+								<span class="ht-title">经典课程</s>
+							</div>
+							<ul class="md-bd" id="classicUl">
+								<!-- <li class="pics-box pull-left">
+									<a href="courseDetail.html">
+										<img src="../images/zb1.png">
+										<h4>
+											<span class="pics-tit">
+												jenkins技术应用
+											</span>
+										</h4>
+									</a>
+								</li>
+
+								<li class="pics-box pull-left">
+									<a href="#">
+										<img src="../images/zb1.png">
+										<h4>
+											<span class="pics-tit">
+												jenkins技术应用
+											</span>
+											<span class="tutor">颜丽</span>
+										</h4>
+									</a>
+
+								</li>
+								<li class="pics-box pull-left">
+									<a href="#">
+										<img src="../images/zb1.png">
+										<h4>
+											<span class="pics-tit">
+												jenkins技术应用
+											</span>
+										</h4>
+									</a>
+								</li>
+								<li class="pics-box pull-left">
+									<a href="#">
+										<img src="../images/zb1.png">
+										<h4>
+											<span class="pics-tit">
+												jenkins技术应用
+											</span>
+										</h4>
+									</a>
+								</li>
+								<li class="pics-box pull-left"> -->
+								<!-- 	<a href="#">
+										<img src="../images/zb1.png">
+										<h4>
+											<span class="pics-tit">
+												jenkins技术应用
+											</span>
+										</h4>
+									</a>
+								</li> -->
+							</ul>
+						</div>
+					</div>
+				</div>
+				<!-- 热门课程部分 -->
+				<div class="md-container">
+					<span class="more">
+						<a href="hotCourse.html">查看更多 >></a>
+					</span>
+					<div class="md-com-list">
+						<div class="md-hd">
+							<div class="pull-left">
+								<span class="ht-title">热门课程</s>
+							</div>
+							<ul class="md-bd" id="hotUl">
+								<!-- <div style="clear: both"></div> -->
+								<!-- <li class="pics-box pull-left">
+									<a href="#">
+										<img src="../images/zb1.png">
+										<h4>
+											<span class="pics-tit">
+												jenkins技术应用
+											</span>
+										</h4>
+									</a>
+
+								</li>
+								<li class="pics-box pull-left">
+									<a href="#">
+										<img src="../images/zb1.png">
+										<h4>
+											<span class="pics-tit">
+												jenkins技术应用
+											</span>
+										</h4>
+									</a>
+								</li>
+								<li class="pics-box pull-left">
+									<a href="#">
+										<img src="../images/zb1.png">
+										<h4>
+											<span class="pics-tit">
+												jenkins技术应用
+											</span>
+										</h4>
+									</a>
+								</li>
+								<li class="pics-box pull-left">
+									<a href="#">
+										<img src="../images/zb1.png">
+										<h4>
+											<span class="pics-tit">
+												jenkins技术应用
+											</span>
+										</h4>
+									</a>
+								</li> -->
+							</ul>
+						</div>
+					</div>
+				</div>
+				<!-- 免费课部分 -->
+				<!-- <div class="md-container">
+				<div class="md-com-list">
+					<div class="md-hd">
+						<div class="pull-left">
+							<span class="ht-title">免费课</span>
+						</div>
+						<ul class="md-bd">
+							<li class="pics-box pull-left">
+								<a href="#">
+									<img src="../../images/zb1.png">
+									<h4>
+										<span class="pics-tit">
+											jenkins技术应用
+										</span>
+									</h4>
+								</a>
+							</li>
+							<!-- <div style="clear: both"></div> -->
+				<!--<li class="pics-box pull-left">
+									<a href="#">
+										<img src="../../images/zb1.png">
+										<h4>
+											<span class="pics-tit">
+												jenkins技术应用
+											</span>
+										</h4>
+									</a>
+								
+							</li>
+							<li class="pics-box pull-left">
+									<a href="#">
+										<img src="../../images/zb1.png">
+										<h4>
+											<span class="pics-tit">
+												jenkins技术应用
+											</span>
+										</h4>
+									</a>
+							</li>
+							<li class="pics-box pull-left">
+									<a href="#">
+										<img src="../../images/zb1.png">
+										<h4>
+											<span class="pics-tit">
+												jenkins技术应用
+											</span>
+										</h4>
+									</a>
+							</li>
+							<li class="pics-box pull-left">
+									<a href="#">
+										<img src="../../images/zb1.png">
+										<h4>
+											<span class="pics-tit">
+												jenkins技术应用
+											</span>
+										</h4>
+									</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+		</div> -->
+				<!-- 培优课部分 -->
+				<!-- <div class="md-container">
+				<div class="md-com-list">
+					<div class="md-hd">
+						<div class="pull-left">
+							<span class="ht-title">培优课</s>
+						</div>
+						<ul class="md-bd">
+							<li class="pics-box pull-left">
+								<a href="#">
+									<img src="../../images/zb1.png">
+									<h4>
+										<span class="pics-tit">
+											jenkins技术应用
+										</span>
+									</h4>
+								</a>
+							</li>
+							<!-- <div style="clear: both"></div> -->
+				<!--<li class="pics-box pull-left">
+									<a href="#">
+										<img src="../../images/zb1.png">
+										<h4>
+											<span class="pics-tit">
+												jenkins技术应用
+											</span>
+										</h4>
+									</a>
+								
+							</li>
+							<li class="pics-box pull-left">
+									<a href="#">
+										<img src="../../images/zb1.png">
+										<h4>
+											<span class="pics-tit">
+												jenkins技术应用
+											</span>
+										</h4>
+									</a>
+							</li>
+							<li class="pics-box pull-left">
+									<a href="#">
+										<img src="../../images/zb1.png">
+										<h4>
+											<span class="pics-tit">
+												jenkins技术应用
+											</span>
+										</h4>
+									</a>
+							</li>
+							<li class="pics-box pull-left">
+									<a href="#">
+										<img src="../../images/zb1.png">
+										<h4>
+											<span class="pics-tit">
+												jenkins技术应用
+											</span>
+										</h4>
+									</a>
+							</li>
+						</ul>
+					</div>
+					<div class="page-con-footer"></div>
+				</div>
+				
+		</div> -->
+				<!-- 右侧排行榜 -->
+				<div class="rank-container">
+					<div class="rank-title">
+						<i class="glyphicon glyphicon-stats"></i>
+						<span>课程排行榜</span>
+					</div>
+					<div class="rank-body">
+						<ul id="rankUl">
+							<li>
+								<a href="javascript:;">
+									<span class="rank-id active3">
+										1
+									</span>
+									<span class="rank-tit">
+										
+									</span>
+									<i class="glyphicon glyphicon-fire"></i>
+									<span class="rank-click">
+										
+									</span>
+								</a>
+							</li>
+							<li>
+								<a href="">
+									<span class="rank-id active3">
+										2
+									</span>
+									<span class="rank-tit">
+										
+									</span>
+									<span class="rank-click">
+										
+									</span>
+								</a>
+							</li>
+							<li>
+								<a href="">
+									<span class="rank-id active3">
+										3
+									</span>
+									<span class="rank-tit">
+										
+									</span>
+									<span class="rank-click">
+										
+									</span>
+								</a>
+							</li>
+							<li>
+								<a href="">
+									<span class="rank-id">
+										4
+									</span>
+									<span class="rank-tit">
+										
+									</span>
+									<span class="rank-click">
+										
+									</span>
+								</a>
+							</li>
+							<li>
+								<a href="">
+									<span class="rank-id">
+										5
+									</span>
+									<span class="rank-tit">
+										
+									</span>
+									<span class="rank-click">
+										
+									</span>
+								</a>
+							</li>
+							<li>
+								<a href="">
+									<span class="rank-id">
+										6
+									</span>
+									<span class="rank-tit">
+										
+									</span>
+									<span class="rank-click">
+										
+									</span>
+								</a>
+							</li>
+							<li>
+								<a href="">
+									<span class="rank-id">
+										7
+									</span>
+									<span class="rank-tit">
+										
+									</span>
+									<span class="rank-click">
+										
+									</span>
+								</a>
+							</li>
+							<li>
+								<a href="">
+									<span class="rank-id">
+										8
+									</span>
+									<span class="rank-tit">
+										
+									</span>
+									<span class="rank-click">
+										
+									</span>
+								</a>
+							</li>
+							<li>
+								<a href="">
+									<span class="rank-id">
+										9
+									</span>
+									<span class="rank-tit">
+										
+									</span>
+									<span class="rank-click">
+										
+									</span>
+								</a>
+							</li>
+							<li>
+								
+								<a href="">
+									<span class="rank-id">
+										10
+									</span>
+									<span class="rank-tit">
+										
+									</span>
+									<span class="rank-click">
+										
+									</span>
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!--页面尾部  -->
+		<div class="footerpage" th:replace="commons/footer::footer"></div>
+		<input id="usersession" type="hidden" th:value="${session.user}" />
+	</div>
+
+</body>
+<!-- 引入的公共登录页面的js文件 -->
+<!-- <script>
+ $(document).ready(function(){
+     $('.headerpage').load('header.html',function(){
+         var sc=document.createElement('script')
+         sc.src='../../js/index.js'
+         $('body').append(sc)
+     })
+     $('.footerpage').load('footer.html')
+ })
+</script> -->
+<script th:inline="javascript">
+	var session=$("#usersession").val();
+	
+	$.ajax({
+		url: '/course/classicCourse',
+		type: 'get',
+		dataType: 'json',
+		success: function (result) {
+			if (result.code == 100) {
+				$.each(result.map.course,function(){
+					var id=this.courseId
+					var imgSrc=this.courseImgUrl
+					var name=this.courseName
+					var aEle=$("<a></a>").attr("href","courseDetail.html?id="+id);
+					var imgEle=$("<img></img>").attr("src","../images/"+imgSrc);
+					var spanEle=$("<span></span>").append(name).addClass("pics-tit");
+					var liEle=$("<li></li>").addClass("pics-box pull-left");
+					var hEle=$("<h4></h4>")
+					hEle.append(spanEle)
+					aEle.append(imgEle).append(hEle)
+					liEle.append(aEle)
+					$("#classicUl").append(liEle);
+				})
+			}
+		}
+	});
+
+	/* $.ajax({
+		url: '/popularVoService',
+		type: 'get',
+		dataType: 'json',
+		success: function (result) {
+			var hotCourse = result.map.vos
+			var a = $('#hotUl a')
+			var img = $('#hotUl img')
+			var span = $('#hotUl span')
+			if (result.code == 100) {
+				for (var i = 0; i < hotCourse.length; i++) {
+					a[i].href = "courseDetail.html?id=" + hotCourse[i].course_id
+					img[i].src = "../images/" + hotCourse[i].courseImgUrl
+					span[i].text(hotCourse[i].course_name)
+				}
+			}
+		}
+		
+
+	}); */
+	// 热门课程
+	$.ajax({
+		url: '/popularVoServiceTOP20',
+		type: 'get',
+		dataType: 'json',
+		success: function (result) {
+			if (result.code == 100) {
+				$.each(result.map.vos, function () {
+                    var hId = this.course_id;
+                    var hUrl = this.course_img_url;
+                    var hName = this.course_name;
+                    var click=this.cnt;
+                    var aEle = $("<a></a>").attr("href", "courseDetail.html?id=" + hId);
+                    var imgEle = $("<img></img>").attr("src", "../images/" + hUrl);
+                    var spanEle1 = $("<span></span>").append(hName).addClass("pics-tit");
+                    var spanEle2 = $("<span></span>").append("热 度 : "+click).addClass('click');
+                    var liEle = $("<li></li>").addClass("pics-box pull-left");
+                    var hEle = $("<h4></h4>")
+                    hEle.append(spanEle1)
+                    aEle.append(imgEle).append(hEle).append(spanEle2)
+                    liEle.append(aEle)
+                    $("#hotUl").append(liEle);
+                })
+
+			}
+		}
+	})
+
+	
+	function loadData() {	
+	// 排行榜
+	$.ajax({
+		url: '/popularVoService',
+		type: 'get',
+		dataType: 'json',
+		success: function (result) {
+			if (result.code == 100) {
+				$.each(result.map.vos, function (key, value) {
+					var rId = this.course_id;
+					var rName = this.course_name;
+					var cli = this.cnt;
+					var rankTit=$('#rankUl li .rank-tit');
+					var rankCli=$('#rankUl li .rank-click');
+					var rankA=$('#rankUl li a');
+					rankTit.eq(key).text(rName);
+					rankCli.eq(key).text(cli);
+					rankA.eq(key).attr('href','courseDetail.html?id='+rId);
+					
+				})
+			}
+			
+		}
+	})
+}
+$(function(){
+    loadData();
+});
+
+</script>
+
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--    引入topbar-->
+    <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0" th:fragment="topbar">
+        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">欢迎您，管理员[[${session.user.username}]]</a>
+			<input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search" id="search">
+			<ul class="navbar-nav px-3">
+				<li class="nav-item text-nowrap">
+					<a class="nav-link" href="#" th:href="@{/admin/loginOut}">退出</a>
+				</li>
+			</ul>
+    </nav>
+<!--    引入sidebar-->
+    <nav class="col-md-2 d-none d-md-block bg-light sidebar" id="sidebar">
+        <div class="sidebar-sticky">
+						<ul class="nav flex-column">
+							<li class="nav-item">
+								<a class="nav-link  active" th:class="${activeUri=='main.html'?'nav-link active':'nav-link'}" href="#" th:href="@{/main}">
+									主页 <span class="sr-only">(current)</span>
+								</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" th:class="${activeUri=='userlist.html'?'nav-link active':'nav-link'}" href="#" th:href="@{/user/queryAll}">
+									用户信息
+								</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" th:class="${activeUri=='courseList.html'?'nav-link active':'nav-link'}" href="#" th:href="@{/course/queryAll}">
+									课程信息
+								</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" th:class="${activeUri=='courseRank.html'?'nav-link active':'nav-link'}" href="#" th:href="@{/course/courseRankHtml}">
+									课程排名
+								</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" th:class="${activeUri=='onlinePeople.html'?'nav-link active':'nav-link'}" th:href="@{/onlinePeopleHtml}">
+									在线人数
+								</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" th:class="${activeUri=='teacherRank.html'?'nav-link active':'nav-link'}" href="#" th:href="@{/teachaerRankHtml}">
+									老师排名
+								</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" th:class="${activeUri=='userRatin.html'?'nav-link active':'nav-link'}" href="#" th:href="@{/user/userRatinHtml}">
+									用户性别对比
+								</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" th:class="${activeUri=='userArea.html'?'nav-link active':'nav-link'}" href="#" th:href="@{/user/userAreaHtml}">
+									用户区域分布
+								</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" th:class="${activeUri=='userAge.html'?'nav-link active':'nav-link'}" href="#" th:href="@{/user/userAgeHtml}">
+									用户年龄比率
+								</a>
+							</li>
+						</ul>
+					</div>
+    </nav>
+</body>
+</html>

@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<!-- saved from url=(0053)https://getbootstrap.com/docs/4.3/examples/dashboard/ -->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta name="description" content="">
+		<meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+		<meta name="generator" content="Jekyll v3.8.5">
+		<title>在线人数</title>
+
+		<!-- <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/dashboard/"> -->
+
+		<!-- Bootstrap core CSS -->
+		<link href="../css/bootstrap.min.css" rel="stylesheet">
+
+		<link href="../css/dashboard.css" rel="stylesheet">
+		<style>
+			center button{
+				margin-left:10px;
+				margin-bottom:15px;
+				border-radius:7px;
+				letter-spacing:5px;
+				padding:2px 5px;
+			}
+			center button:hover{
+				box-shadow:0 0 10px 0 black;
+			}
+			center #hourBtn{
+				background-color:rgb(243, 123, 243);
+			}
+			center #dayBtn{
+				background-color:rgb(255, 109, 109);
+			}
+			center #weekBtn{
+				background-color:rgb(255, 145, 19);
+			}
+			center #mouthBtn{
+				background-color:rgb(19, 149, 255);
+			}
+		</style>
+	</head>
+	<body>
+<!--		引入抽取的topbar-->
+    <div th:replace="commons/bar::topbar"></div>
+		<div class="container-fluid">
+			<div class="row">
+				<!--				引入侧边栏-->
+                <div th:replace="~{commons/bar::#sidebar(activeUri='onlinePeople.html')}"></div>
+
+				<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+					<center>
+						<button type="button" id="hourBtn">按时</button>
+						<button type="button" id="dayBtn">按天</button>
+						<button type="button" id="weekBtn">按周</button>
+						<button type="button" id="mouthBtn">按月</button>
+					</center>
+					<canvas id="myChart" width="1522" height="642" style="display: block; height: 514px; width: 1218px;"></canvas>
+
+					<div class="table-responsive">
+					</div>
+				</main>
+			</div>
+		</div>
+		<script type="text/javascript" src="../js/jquery-1.12.4.js"></script>
+		<script src="../js/bootstrap.bundle.min.js"></script>
+		<script src="../js/feather.min.js"></script>
+		<script src="../js/echarts.js"></script>
+		<script type="text/javascript">
+		window.onload=getData();
+		//获取数据
+		function getData(){
+			$.ajax({
+				url:"/houronline",
+				type:"post",
+				success:function(result){
+					if(result.code==0){
+							var xtime=[];
+							var ycount=[];
+						$.each(result.map.online,function(){
+							xtime.push(this.hour);
+							ycount.push(this.count);
+							// 基于准备好的dom，初始化echarts实例
+							var myChart = echarts.init(document.getElementById('myChart'));
+							//清空画布
+							myChart.clear();
+							/* myChart.setOption(lifeCycleChangeOption); */
+							// 指定图表的配置项和数据
+							var option = {
+								color:['rgb(243, 123, 243)'],
+								title: {
+									text: '在线人数'
+								},
+								tooltip: {
+								},
+								legend: {
+									data:['人数']
+								},
+								xAxis: {
+									data: xtime,
+									axisLabel : {//坐标轴刻度标签的相关设置。
+									fontSize:16,
+										interval: 0,  
+										formatter:function(value)  
+			                               {  
+											debugger  
+	                                         var ret = "";//拼接加\n返回的类目项  
+	                                         var maxLength = 4;//每项显示文字个数  
+	                                         var valLength = value.length;//X轴类目项的文字个数  
+	                                         var rowN = Math.ceil(valLength / maxLength); //类目项需要换行的行数  
+	                                         if (rowN > 1)//如果类目项的文字大于3,  
+	                                         {  
+	                                             for (var i = 0; i < rowN; i++) {  
+	                                                 var temp = "";//每次截取的字符串  
+	                                                 var start = i * maxLength;//开始截取的位置  
+	                                                 var end = start + maxLength;//结束截取的位置  
+	                                                 //这里也可以加一个是否是最后一行的判断，但是不加也没有影响，那就不加吧  
+	                                                 temp = value.substring(start, end) + "\n";  
+	                                                 ret += temp; //凭借最终的字符串  
+	                                             }  
+	                                             return ret;  
+	                                         }  
+	                                         else {  
+	                                             return value;  
+	                                         }    
+			                               }   
+						            },
+								},
+								yAxis: {},
+								series: [{
+									name: '人数',
+									type: 'line',
+									data: ycount,
+								}]
+							};
+							// 使用刚指定的配置项和数据显示图表。
+							myChart.setOption(option,true);
+						});	
+					}
+					
+				}	
+			}); 
+		}
+		//按时
+		$("#hourBtn").click(function(){
+			getData();
+		});
+		//按天
+		$("#dayBtn").click(function(){
+			$.ajax({
+				url:"/dailyonline",
+				type:"post",
+				success:function(result){
+					if(result.code==0){
+						var xtime=[];
+						var ycount=[];
+						$.each(result.map.online,function(){
+							xtime.push(this.day);
+							ycount.push(this.count);
+							// 基于准备好的dom，初始化echarts实例
+							var myChart = echarts.init(document.getElementById('myChart'));
+							//清空画布
+							myChart.clear();
+							// 指定图表的配置项和数据
+							var option = {
+								color:['rgb(255, 109, 109)'],
+								title: {
+									text: '在线人数'
+								},
+								tooltip: {
+								},
+								legend: {
+									data:['人数']
+								},
+								xAxis: {
+									data: xtime,
+									axisLabel : {//坐标轴刻度标签的相关设置。
+										fontSize:16,
+										interval: 0,  
+										formatter:function(value)  
+			                               {  
+											debugger  
+	                                         var ret = "";//拼接加\n返回的类目项  
+	                                         var maxLength = 4;//每项显示文字个数  
+	                                         var valLength = value.length;//X轴类目项的文字个数  
+	                                         var rowN = Math.ceil(valLength / maxLength); //类目项需要换行的行数  
+	                                         if (rowN > 1)//如果类目项的文字大于3,  
+	                                         {  
+	                                             for (var i = 0; i < rowN; i++) {  
+	                                                 var temp = "";//每次截取的字符串  
+	                                                 var start = i * maxLength;//开始截取的位置  
+	                                                 var end = start + maxLength;//结束截取的位置  
+	                                                 //这里也可以加一个是否是最后一行的判断，但是不加也没有影响，那就不加吧  
+	                                                 temp = value.substring(start, end) + "\n";  
+	                                                 ret += temp; //凭借最终的字符串  
+	                                             }  
+	                                             return ret;  
+	                                         }  
+	                                         else {  
+	                                             return value;  
+	                                         }    
+			                               }   
+						            },
+								},
+								yAxis: {},
+								series: [{
+									name: '人数',
+									type: 'line',
+									data: ycount,
+								}]
+							};
+							// 使用刚指定的配置项和数据显示图表。
+							myChart.setOption(option,true);
+						});	
+					}
+					
+				}	
+			}); 
+		});
+		//按周
+		$("#weekBtn").click(function(){
+			$.ajax({
+				url:"/weekonline",
+				type:"post",
+				success:function(result){
+					if(result.code==0){
+						var xtime=[];
+						var ycount=[];
+						$.each(result.map.online,function(){
+							xtime.push(this.week);
+							ycount.push(this.count);
+							// 基于准备好的dom，初始化echarts实例
+							var myChart = echarts.init(document.getElementById('myChart'));
+							//清空画布
+							myChart.clear();
+							// 指定图表的配置项和数据
+							var option = {
+								color:['rgb(255, 145, 19)'],
+								title: {
+									text: '在线人数'
+								},
+								tooltip: {
+								},
+								legend: {
+									data:['人数']
+								},
+								xAxis: {
+									data: xtime,
+									axisLabel : {//坐标轴刻度标签的相关设置。
+										fontSize:16,
+										interval: 0,  
+										formatter:function(value)  
+			                               {  
+											debugger  
+	                                         var ret = "";//拼接加\n返回的类目项  
+	                                         var maxLength = 4;//每项显示文字个数  
+	                                         var valLength = value.length;//X轴类目项的文字个数  
+	                                         var rowN = Math.ceil(valLength / maxLength); //类目项需要换行的行数  
+	                                         if (rowN > 1)//如果类目项的文字大于3,  
+	                                         {  
+	                                             for (var i = 0; i < rowN; i++) {  
+	                                                 var temp = "";//每次截取的字符串  
+	                                                 var start = i * maxLength;//开始截取的位置  
+	                                                 var end = start + maxLength;//结束截取的位置  
+	                                                 //这里也可以加一个是否是最后一行的判断，但是不加也没有影响，那就不加吧  
+	                                                 temp = value.substring(start, end) + "\n";  
+	                                                 ret += temp; //凭借最终的字符串  
+	                                             }  
+	                                             return ret;  
+	                                         }  
+	                                         else {  
+	                                             return value;  
+	                                         }    
+			                               }   
+						            },
+								},
+								yAxis: {},
+								series: [{
+									name: '人数',
+									type: 'line',
+									data: ycount,
+								}]
+							};
+							// 使用刚指定的配置项和数据显示图表。
+							myChart.setOption(option,true);
+						});	
+					}
+					
+				}	
+			}); 
+		});
+		//按月
+		$("#mouthBtn").click(function(){
+			$.ajax({
+				url:"/monthonline",
+				type:"post",
+				success:function(result){
+					if(result.code==0){
+						var xtime=[];
+						var ycount=[];
+						$.each(result.map.online,function(){
+							xtime.push(this.month);
+							ycount.push(this.count);
+							// 基于准备好的dom，初始化echarts实例
+							var myChart = echarts.init(document.getElementById('myChart'));
+							//清空画布
+							myChart.clear();
+							// 指定图表的配置项和数据
+							var option = {
+								color:['rgb(19, 149, 255)'],
+								title: {
+									text: '在线人数'
+								},
+								tooltip: {
+								},
+								legend: {
+									data:['人数']
+								},
+								xAxis: {
+									data: xtime,
+									axisLabel : {//坐标轴刻度标签的相关设置。
+										fontSize:16,
+										interval: 0,  
+										formatter:function(value)  
+			                               {  
+											debugger  
+	                                         var ret = "";//拼接加\n返回的类目项  
+	                                         var maxLength = 4;//每项显示文字个数  
+	                                         var valLength = value.length;//X轴类目项的文字个数  
+	                                         var rowN = Math.ceil(valLength / maxLength); //类目项需要换行的行数  
+	                                         if (rowN > 1)//如果类目项的文字大于3,  
+	                                         {  
+	                                             for (var i = 0; i < rowN; i++) {  
+	                                                 var temp = "";//每次截取的字符串  
+	                                                 var start = i * maxLength;//开始截取的位置  
+	                                                 var end = start + maxLength;//结束截取的位置  
+	                                                 //这里也可以加一个是否是最后一行的判断，但是不加也没有影响，那就不加吧  
+	                                                 temp = value.substring(start, end) + "\n";  
+	                                                 ret += temp; //凭借最终的字符串  
+	                                             }  
+	                                             return ret;  
+	                                         }  
+	                                         else {  
+	                                             return value;  
+	                                         }    
+			                               }   
+						            },
+								},
+								yAxis: {},
+								series: [{
+									name: '人数',
+									type: 'line',
+									data: ycount,
+								}]
+							};
+							// 使用刚指定的配置项和数据显示图表。
+							myChart.setOption(option,true);
+						});	
+					}
+					
+				}	
+			}); 
+		});
+		</script>
+	</body>
+</html>

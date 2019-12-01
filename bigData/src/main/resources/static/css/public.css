@@ -1,0 +1,335 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    height: 100%;
+    width:100%;
+    overflow: hidden;
+}
+
+#page {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.w {
+    width: 1600px;
+    overflow: hidden;
+    margin: 0 auto;
+}
+#loginModal .help-block{
+	margin-left:100px;
+}
+
+.page1-header {
+    height: 70px;
+    width: 1600px;
+    min-width: 1200px;
+    background-color: lightblue;
+    /* background-color: rgb(94, 241, 252); */
+    /* background-color: #f88400 */
+    /* background-color: #c1e427; */
+}
+
+.l-logo {
+    display: block;
+    height: 70px;
+    width: 115px;
+    position: relative;
+    overflow: hidden;
+}
+
+.container {
+    /* height: 70px; */
+    text-align: left;
+    /* background-color:rgb(133, 10, 10); */
+    position: relative;
+    width: 1200px;
+}
+
+.container .l-logo img {
+    /* display: inline-block; */
+    height: 195px;
+    width: 255px;
+    /* vertical-align: middle; */
+    position: absolute;
+    top: -50px;
+    left: -65px;
+    z-index: 2;
+    /* box-shadow: 0 0 10px 0 #5c5858 */
+}
+
+.navbar {
+    display: block;
+    width: 500px;
+    margin-top: 16px;
+    margin-left: 130px;
+}
+
+.navbar a {
+    color: #1a0f0f94;
+    display: inline-block;
+    background-color: transparent;
+    font-size: 22px;
+    font-weight: 800;
+    font-family: "楷体"
+        /* font-family: 'Courier New', Courier, monospace; */
+}
+
+.navbar a:hover {
+    /* background-color:transparent; */
+    color: #e42727;
+    /* opacity: 0; */
+}
+
+.container .search {
+    position: absolute;
+    top: 16px;
+    right: 255px;
+}
+
+.container .search input {
+    width: 150px;
+    height: 30px;
+    border-radius: 5%;
+    padding-left: 5px;
+    box-shadow: 0 0 4px #4595b4;
+}
+
+.container .search .search-btn {
+    margin-right: 15px;
+    background-color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    box-shadow: 0 0 15px #5c5858;
+}
+
+.container .search .search-btn .glyphicon {
+    font-size: 20px;
+    color: rgba(42, 11, 156, 0.58);
+    font-weight: 800;
+}
+
+.login-area {
+    margin-left: 1030px;
+    margin-top: -66px;
+    position: relative;
+}
+
+.login-area .no-login li {
+    float: left;
+    list-style: none;
+}
+
+.login-area .no-login li a {
+    font-size: 16px;
+    color: rgb(32, 8, 250)
+}
+
+.login-area .no-login li a:hover {
+    text-decoration: none;
+    /* font-size: 18px; */
+}
+
+.login-area .line {
+    margin: 0 5px;
+    font-size: 16px;
+}
+
+/* 头像 */
+.login {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+}
+
+.login li {
+    list-style: none;
+}
+
+.login .login-box {
+    position: relative;
+}
+
+.login .login-box>a {
+    display: block;
+    height: 50px;
+    width: 50px;
+    /* background-color: yellow; */
+    border-radius: 50%;
+    position: absolute;
+    top: -12px;
+    left: 6px;
+    overflow: hidden;
+}
+
+.login .login-box>a>img {
+    height: 70px;
+    width: 70px;
+    border-radius: 50%;
+    margin-top: -8px;
+    margin-left: -10px;
+}
+
+.login>span {
+    position: absolute;
+    top: 20px;
+    left: 62px;
+    height: 40px;
+    width: 100px;
+    color: hsla(288, 2%, 40%, 0.925);
+    font-size: 16px;
+    font-family: "仿宋";
+    font-style: italic
+}
+
+.login-item {
+    position: absolute;
+    width: 130px;
+    /* height: 130px; */
+    top: 42px;
+    left: -36px;
+    /* background-color: rgb(243, 209, 196); */
+    background-color: pink;
+    box-shadow: 0 0 10px #666161;
+}
+
+.login-item .user-name {
+    height: 50px;
+    line-height: 50px;
+    /* padding-top: 0px; */
+    font-size: 14px;
+    /* border-top: 3px solid #e42727; */
+    border-top: 3px solid #000000;
+    color: blue;
+    font-family: '楷体';
+    font-weight: 500;
+    background-color: #fff;
+    overflow: hidden;
+}
+
+.login-item ul li {
+    height: 40px;
+    line-height: 40px;
+    border-bottom: 1px solid #bbb1b1;
+    text-align: center;
+}
+
+.login-item ul li a:hover {
+    background-color: rgb(65, 109, 231);
+    color: white;
+}
+
+.login-item ul li a {
+    display: block;
+    height: 40px;
+    width: 130px;
+    font-size: 15px;
+    color: #000000;
+}
+
+.login-item ul li a:hover {
+    text-decoration: none;
+}
+
+
+
+/* 页尾部分 */
+.page-footer {
+    padding-top: 66px;
+    padding-bottom: 50px;
+    background-color: rgb(221, 216, 216);
+    /* background-color: rgb(128, 123, 123);   */
+}
+
+.bt-fl {
+    /* padding-top: 66px; */
+    margin-left: 300px;
+}
+
+.page-footer ul li {
+    list-style: none;
+    float: left;
+    margin-right: 20px;
+}
+
+.page-footer ul li a {
+    color: rgb(119, 117, 117);
+    font-size: 14px;
+}
+
+.page-footer ul li a:hover {
+    text-decoration: none;
+    color: #fff;
+}
+
+.copyright {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.bt-line {
+    height: 1px;
+    width: 100%;
+    background-color: #fff;
+    margin-top: 80px;
+}
+
+.active1 a {
+    color: #e42727 !important;
+    background-color: #fff !important;
+}
+
+.page-con-footer {
+    width: 1600px;
+    height: 67px;
+    background: url('/images/footer.png');
+    margin-bottom: -15px;
+    background-color: rgb(243, 243, 241);
+}
+
+/* 登录模态框 */
+#loginModal label {
+    font-size: 16px;
+    margin: 10px 20px;
+}
+
+#loginModal .form-control {
+    display: inline-block;
+    width: 61%;
+}
+
+#loginModal .modal-dialog {
+    width: 416px;
+}
+
+#loginModal .form-group {
+    margin-left: 20px;
+    margin-top: 20px;
+}
+
+#loginModal .btn-default {
+    float: left;
+}
+
+#loginModal .modal-footer {
+    padding: 20px 60px;
+}
+
+.opt {
+    margin-left: 95px !important;
+}

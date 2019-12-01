@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>100分勤学网---课程详情页</title>
+    <script type="text/javascript" src="../js/u-jquery-1.12.3.js"></script>
+    <script type="text/javascript" src="../js/u-bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../css/u-bootstrap.min.css">
+    <script type="text/javascript" src="../js/public.js"></script>
+    <link rel="stylesheet" href="../css/public.css">
+    <link rel="stylesheet" href="../css/courseDetail.css">
+    <script type="text/javascript" src="../js/index.js"></script>
+    <script type="text/javascript" src="../js/courseDetail.js"></script>
+    <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon" />
+</head>
+
+<body>
+    <div id="page">
+        <!-- 头部 -->
+        <div class="headerpage" th:replace="commons/header::page2-header"></div>
+        <div class="w">
+            <!-- 中间详情部分 -->
+            <div class="detail-container">
+                <div class="detail-top">
+                    <div class="de-img " id="de-img">
+                        <p id="de-video">
+                            <!-- <img src="../images/detail1.png" alt="" /> -->
+                            <video id="video1" width="620" height="360">
+                                <!-- <source type="video/ogg"> -->
+                                <!-- <source src="../../video/video1.mp4" type="video/mp4"> -->
+                                你的浏览器不支持播放 ！
+                            </video>
+                        </p>
+                        <!-- <div class="banner-cover" style="display: block">  
+                        <div class="banner-cover-live">
+                            <a  class="banner-cover-play" href="javascript:;">
+                                <i id="paly-btn"  class="icon-play">
+                                </i>
+                            </a>
+                            <div class="play-tips">
+                                <span>
+                                    播放
+                                </span>
+                            </div>
+                        </div>
+                    </div> -->
+                    </div>
+                    <div class="de-tex">
+                        <h1 class="de-title" id="de-title"></h1>
+                        <span class="de-tutor" id="de-tutor">
+                            <!-- 授课老师：曾浩 -->
+                        </span>
+                        <span id="play" class="de-btn">
+                            <a id="play-pause" href="javascript:;" class="btn btn-primary btn-lg active"
+                                role="button">进入课程</a>
+                        </span>
+
+                        <i id="collectBtn" class="glyphicon glyphicon-star collection "></i>
+                        <span class="good">
+                            <i id="praiseBtn" class="glyphicon glyphicon-thumbs-up"></i>
+                            <a href="javascript:;" class="good-num" id="good-num"></a>
+                        </span>
+
+                        <i class="glyphicon glyphicon-share share" id="shareBtn"></i>
+
+                    </div>
+                </div>
+                <div class="detail-tab">
+                    <h3>课程简介</h3>
+                </div>
+                <div class="detail-bottom" id="detail-bottom">
+                    <!-- <img src="../../images/detail2.png" alt="课程简介详情图" /> -->
+                    <p>
+                        
+                    </p>
+
+                </div>
+                <!-- <div class="detail-right">
+                    <div class="right-tab">
+                        <h4>相关推荐</h4>
+                    </div>
+                    <div class="right-content">
+                        <div class="rec-box">
+                            <div class="rec-img">
+                                <a href="">
+                                    <img src="../../images/zb1.png" />
+                                </a>
+                            </div>
+                            <div class="rec-info">
+                                <a href="">
+                                    <p class="info-title">
+                                        jenkins技术应用
+                                    </p>
+                                    <!-- <p class="info-tutor">
+                                    授课老师：
+                                    <span class="tea">
+                                        曾浩
+                                    </span>
+                                </p> -->
+                                <!-- </a>
+                            </div>
+                        </div>
+                        <div class="rec-box">
+                            <div class="rec-img">
+                                <a href="">
+                                    <img src="../../images/zb1.png" />
+                                </a>
+                            </div>
+                            <div class="rec-info">
+                                <a href="">
+                                    <p class="info-title">
+                                        jenkins技术应用
+                                    </p> -->
+                                    <!-- <p class="info-tutor">
+                                    授课老师：
+                                    <span class="tea">
+                                        曾浩
+                                    </span>
+                                </p> -->
+                                <!-- </a>
+                            </div>
+                        </div>
+                        <div class="rec-box">
+                            <div class="rec-img">
+                                <a href="">
+                                    <img src="../../images/zb1.png" />
+                                </a>
+                            </div>
+                            <div class="rec-info">
+                                <a href="">
+                                    <p class="info-title">
+                                        jenkins技术应用
+                                    </p> -->
+                                    <!-- <p class="info-tutor">
+                                    授课老师：
+                                    <span class="tea">
+                                        曾浩
+                                    </span>
+                                </p> -->
+                                <!-- </a>
+                            </div>
+                        </div> -->
+                    <!-- </div>
+                </div>  -->
+            </div>
+        </div>
+
+        <!-- 尾部 -->
+        <div class="footerpage" th:replace="commons/footer::footer"></div>
+        <input id="usersession" type="hidden" th:value="${session.user==null}?'aa':${session.user.userId}" />
+    </div>
+    <script type="text/javascript" th:inline="javascript">
+    var userId=$("#usersession").val();//用户id
+    var url = window.location.href
+    var id = url.split('=')[1];//课程id
+        // 播放视频
+        var myvideo = $('#video1')[0]
+        //判断是否收藏
+        if (userId!="aa") {
+        	$.ajax({
+        		url: '/userCollect/find',
+                type: 'get',
+                dataType: 'json',
+                data: {
+                    "courseId": id,
+                    "userId":userId
+                },
+                success: function (result) {
+                	if(result.code==100){
+                		$('#collectBtn').addClass('collected');
+                	}
+                }
+        	});
+        }
+        $('#play').click(function () {
+            if (userId!="aa") {
+            	
+                $('#video1').attr('controls','controls')
+                if (myvideo.paused) {
+                	$.ajax({
+                		url: '/collection/courseInfo',
+                        type: 'get',
+                        dataType: 'json',
+                        data: {
+                            "courseId": id,
+                            "userId":userId
+                        },
+                        success: function (result) {
+                        	if(result.code==100){
+                        		return true;
+                        	}
+                        }
+                	});
+                	
+                    myvideo.play();
+                    $('#play-pause').text('暂停');
+                   
+                }
+                else {
+                    myvideo.pause();
+                    $('#play-pause').text('继续')
+                }
+            }
+           else {
+        	   alert('请先登录！')
+            }
+
+
+        })
+        
+		myvideo.addEventListener("ended",function(){
+	          $('#play-pause').text('重新播放');
+        })
+        // 课程详情
+        
+        $.ajax({
+            url: '/course/getCourseInfo',
+            type: 'get',
+            dataType: 'json',
+            data: {
+                "courseId": id
+            },
+            success: function (result) {
+                if (result.code == 100) {
+                    var detail = result.map.course;
+                    var deId = detail.courseId;
+                    var deImg = detail.courseImgUrl;
+                    var deTitle = detail.courseName;
+                    var teacherName = detail.teacherName;
+                    var detail = detail.courseIntroduction;
+                    var goodNum = result.map.course.praisesCount;
+                    var videoSrc = result.map.course.videoUrl;
+                    $('#video1').attr('poster', '../images/' + deImg);
+                    $('#video1').attr("src", '../video/' + videoSrc);
+                    $('#de-title').append(deTitle)
+                    $('#de-tutor').append('授课老师: ' + teacherName);
+                    $('#good-num').append(goodNum);
+                    $('#detail-bottom p').append(detail);
+                }
+            }
+        })
+
+        $('#shareBtn').click(function () {
+            alert("分享链接:  " + url)
+        })
+
+    </script>
+
+    <!-- 添加收藏 -->
+    <script th:inline="javascript">
+    	
+        // var userId = [[${ session.test }]];
+        $('#collectBtn').click(function () {
+            if (userId!="aa") {
+                $.ajax({
+                    url: '/userCollect/addCollect',
+                    type: 'get',
+                    dataType: 'json',
+                    data: {
+                        'userId': userId,
+                        'courseId': id
+                    },
+                    success: function (result) {
+                        if (result.code == 100) {
+                            $('#collectBtn').addClass('collected')
+                        } else {
+                            $('#collectBtn').removeClass('collected')
+                        }
+                    }
+                })
+            } else {
+                alert('请先登录！')
+            }
+        })
+    </script>
+    <!-- 点赞 -->
+    <script>
+        $('#praiseBtn').click(function(){
+            if(userId!="aa"){
+                $.ajax({
+                    url:'/praise/addPraise',
+                    type:'get',
+                    data:{
+                    	'userId': userId,
+                        'courseId': id
+                    },
+                    dataType:'json',
+                    success:function(result){
+                        if(result.code==100){
+                            $('#praiseBtn').addClass('good1')
+                        }else{
+                            $('#praiseBtn').removeClass('good1')
+                        }
+                    }
+                })
+            }else{
+                alert('请先登录！')
+            }
+        })
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta name="description" content="">
+		<meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+		<meta name="generator" content="Jekyll v3.8.5">
+		<title>课程信息</title>
+
+		<!-- <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/dashboard/"> -->
+
+		<!-- Bootstrap core CSS -->
+		<link href="../css/bootstrap.min.css" rel="stylesheet">
+		<link href="../css/dashboard.css" rel="stylesheet">
+		<style>
+        .pagination { display: inline-block; padding-left: 0; margin: 20px 0; border-radius: 4px; }
+        .pagination li { display: inline; }
+        .pagination li a { position: relative; float: left; padding: 6px 12px; margin-left: -1px; line-height: 1.428571429; text-decoration: none; background-color: #fff; border: 1px solid #ddd; }
+        .pagination li:first-child a { margin-left: 0; border-bottom-left-radius: 4px; border-top-left-radius: 4px; }
+        .pagination li:last-child a { border-top-right-radius: 4px; border-bottom-right-radius: 4px; }
+        .pagination li a:hover, .pagination li a:focus { background-color: #eee; }
+        .pagination .active a, .pagination .active a:hover, .pagination .active a:focus { z-index: 2; color: #fff; cursor: default; background-color: #428bca; border-color: #428bca; }
+        .pagination .disabled a, .pagination .disabled a:hover, .pagination .disabled a:focus { color: #999; cursor: not-allowed; background-color: #fff; border-color: #ddd; }
+        .pagination-lg li a { padding: 10px 16px; font-size: 18px; }
+        .pagination-sm li a, .pagination-sm li span { padding: 5px 10px; font-size: 12px; }
+        .table-striped tbody tr:nth-of-type(2n+1) {
+			  background-color: rgb(207, 220, 236);
+		}
+		.table-striped tbody tr:nth-of-type(2n) {
+			  background-color: rgb(223, 207, 236);
+		}
+    </style>
+	</head>
+	<body>
+<!--		引入抽取的topbar-->
+    <div th:replace="commons/bar::topbar"></div>
+		<div class="container-fluid">
+			<div class="row">
+				<!--				引入侧边栏-->
+                <div th:replace="~{commons/bar::#sidebar(activeUri='courseList.html')}"></div>
+
+				<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+					<div class="table-responsive" id="table_div">
+					<table class="table-bordered table-striped table-sm" >
+							<thead>
+								<tr>
+									<th>课程编号</th>
+									<th>课程名</th>
+									<th>课程介绍</th>
+									<th>课程讲师</th>
+									<th>图片地址</th>
+                                    <th>课程分类</th>
+                                    <th>视频编号</th>
+                                    <th>上传时间</th>
+                                    <th>点赞数</th>
+                                    <th>是否经典</th>
+								</tr>
+							</thead>
+							<tbody>
+                                <tr th:each="courses:${pageInfo.list}">
+                                    <td th:text="${courses.courseId}" style="width: 80px;"></td>
+                                    <td th:text="${courses.courseName}"></td>
+                                    <td th:text="${courses.courseIntroduction}" style="width: 300px;"></td>
+                                    <td th:text="${courses.teacher.teacherName}" style="width: 80px;"></td>
+                                    <td th:text="${courses.courseImgUrl}"></td>
+                                    <td th:text="${courses.classify.classifyName}"></td>
+                                    <td th:text="${courses.video.videoUrl}"></td>
+                                    <td th:text="${#dates.format(courses.uploaddate,'yyyy-MM-dd')}" style="width: 80px;"></td>
+                                    <td th:text="${courses.praisecount}" style="width: 80px;"></td>
+                                    <td th:text="${courses.classic}==1?'是':'否'" style="width: 80px;"></td>
+                                </tr>
+                            </tbody>
+						</table>
+					</div>
+					<center id="center">
+							<nav aria-label="Page navigation">
+							  <ul class="pagination">
+							    <li><a href="#" th:href="@{/course/queryAll?page=1}">首页</a></li>
+							    <li th:if="${pageInfo.hasPreviousPage}">
+							      <a href="#" th:href="@{'/course/queryAll?page='+${pageInfo.pageNum-1}}" aria-label="Previous">
+							        <span aria-hidden="true">&laquo;</span>
+							      </a>
+							    </li>
+							    <li th:each="num:${pageInfo.navigatepageNums}" th:class="${num==pageInfo.pageNum}?'active'">   	
+									<a href="#" th:href="@{'/course/queryAll?page='+${num}}">
+										<span th:text="${num}"></span>
+									</a>
+							    </li>
+							    <li th:if="${pageInfo.hasNextPage}">
+							      <a href="#" th:href="@{'/course/queryAll?page='+${pageInfo.pageNum+1}}" aria-label="Next">
+							        <span aria-hidden="true">&raquo;</span>
+							      </a>
+							    </li>
+							    
+							    <li><a href="#" th:href="@{'/course/queryAll?page='+${pageInfo.pages}}">末页</a></li>
+							  </ul>
+							</nav>
+						</center>
+				</main>
+			</div>
+		</div>
+		
+		<script src="../js/feather.min.js"></script>
+		<script type="text/javascript" src="../js/jquery-1.12.4.js"></script>
+		<script type="text/javascript">
+			$("#search").keydown(function (event) {
+	            if (event.keyCode == 13) {
+	            	var value=$("#search").val();
+	            	location.href = "/course/searchCourse?keywords=" + value;
+	            }
+			});
+		</script>
+	</body>
+</html>

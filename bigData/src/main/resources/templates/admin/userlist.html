@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta name="description" content="">
+		<meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+		<meta name="generator" content="Jekyll v3.8.5">
+		<title>用户信息</title>
+		<!-- Bootstrap core CSS -->
+		<link href="../css/bootstrap.min.css" rel="stylesheet">
+		<link href="../css/dashboard.css" rel="stylesheet">
+		<style>
+        .pagination { display: inline-block; padding-left: 0; margin: 20px 0; border-radius: 4px; }
+        .pagination li { display: inline; }
+        .pagination li a { position: relative; float: left; padding: 6px 12px; margin-left: -1px; line-height: 1.428571429; text-decoration: none; background-color: #fff; border: 1px solid #ddd; }
+        .pagination li:first-child a { margin-left: 0; border-bottom-left-radius: 4px; border-top-left-radius: 4px; }
+        .pagination li:last-child a { border-top-right-radius: 4px; border-bottom-right-radius: 4px; }
+        .pagination li a:hover, .pagination li a:focus { background-color: #eee; }
+        .pagination .active a, .pagination .active a:hover, .pagination .active a:focus { z-index: 2; color: #fff; cursor: default; background-color: #428bca; border-color: #428bca; }
+        .pagination .disabled a, .pagination .disabled a:hover, .pagination .disabled a:focus { color: #999; cursor: not-allowed; background-color: #fff; border-color: #ddd; }
+        .pagination-lg li a { padding: 10px 16px; font-size: 18px; }
+        .pagination-sm li a, .pagination-sm li span { padding: 5px 10px; font-size: 12px; }
+
+		.table-striped tbody tr:nth-of-type(2n+1) {
+			  background-color: rgb(207, 220, 236);
+		}
+		.table-striped tbody tr:nth-of-type(2n) {
+			  background-color: rgb(236, 232, 207);
+		}
+    </style>
+	</head>
+	<body>
+<!--		引入抽取的topbar-->
+    <div th:replace="commons/bar::topbar"></div>
+		<div class="container-fluid">
+			<div class="row">
+				<!--				引入侧边栏-->
+                <div th:replace="~{commons/bar::#sidebar(activeUri='userlist.html')}"></div>
+
+				<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+					<div class="table-responsive">
+						<table class="table table-striped table-sm">
+							<thead>
+								<tr>
+									<th>用户编号</th>
+									<th>用户姓名</th>
+									<th>用户密码</th>
+									<th>email</th>
+									<th>性别</th>
+                                    <th>省份</th>
+                                    <th>状态</th>
+                                    <th>出生日期</th>
+                                    <th>创建时间</th>
+                                    <th>修改时间</th>
+                                    <th>所属大学</th>
+								</tr>
+							</thead>
+							<tbody>
+                                <tr th:each="users:${pageInfo.list}">
+                                    <td th:text="${users.userId}"></td>
+                                    <td th:text="${users.username}"></td>
+                                    <td th:text="${users.password}"></td>
+                                    <td th:text="${users.email}"></td>
+                                    <td th:text="${users.gender}==M?'男':'女'"></td>
+                                    <td th:text="${users.province.provinceName}"></td>
+                                    <td th:text="${users.status}==1?'有效':'无效'"></td>
+                                    <td th:text="${#dates.format(users.birthday,'yyyy-MM-dd')}"></td>
+                                    <td th:text="${#dates.format(users.createtime,'yyyy-MM-dd')}"></td>
+                                    <td th:text="${#dates.format(users.modifytime,'yyyy-MM-dd')}"></td>
+                                    <td th:text="${users.college}"></td>
+                                </tr>
+                            </tbody>
+						</table>
+					</div>
+						<center>
+							<nav aria-label="Page navigation">
+							  <ul class="pagination">
+							    <li><a href="#" th:href="@{/user/queryAll?page=1}">首页</a></li>
+							    <li th:if="${pageInfo.hasPreviousPage}">
+							      <a href="#" th:href="@{'/user/queryAll?page='+${pageInfo.pageNum-1}}" aria-label="Previous">
+							        <span aria-hidden="true">&laquo;</span>
+							      </a>
+							    </li>
+							    <li th:each="num:${pageInfo.navigatepageNums}" th:class="${num==pageInfo.pageNum}?'active'">   	
+									<a href="#" th:href="@{'/user/queryAll?page='+${num}}">
+										<span th:text="${num}"></span>
+									</a>
+							    </li>
+							    <li th:if="${pageInfo.hasNextPage}">
+							      <a href="#" th:href="@{'/user/queryAll?page='+${pageInfo.pageNum+1}}" aria-label="Next">
+							        <span aria-hidden="true">&raquo;</span>
+							      </a>
+							    </li>
+							    
+							    <li><a href="#" th:href="@{'/user/queryAll?page='+${pageInfo.pages}}">末页</a></li>
+							  </ul>
+							</nav>
+						</center>
+				</main>
+			</div>
+		</div>
+		<script src="../js/feather.min.js"></script>
+		<script type="text/javascript" src="../js/jquery-1.12.4.js"></script>
+		<script type="text/javascript">
+			$("#search").keydown(function (event) {
+	            if (event.keyCode == 13) {
+	            	var value=$("#search").val();
+	            	location.href = "/user/searchUser?keywords=" + value;
+	            }
+			});
+		</script>
+
+	</body>
+</html>

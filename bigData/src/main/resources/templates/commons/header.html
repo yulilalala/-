@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<link rel="stylesheet" href="../css/public.css">
+</head>
+
+<body>
+	<!-- 页面头部 -->
+	<div class="page1-header" th:fragment="page2-header">
+		<div class="container">
+			<div class="l-logo pull-left">
+				<a href="index.html">
+					<img src="../images/logo2.png" />
+				</a>
+			</div>
+			<div class="navbar" id="navbar">
+				<ul class="nav navbar-nav navbar-header nav-tabs">
+					<li><a class="" href="index.html">首页</a></li>
+					<li><a href="course.html" class="">经典课程</a></li>
+					<li><a href="hotCourse.html">热门课程</a></li>
+					<!-- <li><a href="#">经典课程</a></li> -->
+					<li><a href="aboutUS.html">关于我们</a></li>
+				</ul>
+			</div>
+			<div class="search">
+				<input type="text" value="" placeholder="你想学的课程~" id="seaInput"/>
+				
+					<button class="search-btn" id="search-btn">
+					<i class="glyphicon glyphicon-search"></i>
+					<!-- <i></i> -->
+					</button>
+				
+				
+			</div>
+			<div class="login-area" id="login_statelty">
+				<ul class="no-login" th:style="'display:' + @{(${session.user!=null} ? 'none' : 'block')} + ''" id="noLogin">
+					<li>
+						<a href="#" data-toggle="modal" data-target="#registerModal" id="registerBtn">
+							注册
+						</a>
+						<div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="myModalLabel">注册界面</h4>
+					</div>
+					<div class="modal-body">
+						<form id="register_form">
+							<div class="form-group">
+								<label>用户名</label>
+								<input type="text" class="form-control" id="userName_register_input" name="username" placeholder="username">
+								<span id="" class="help-block"></span>
+							</div>
+							<div class="form-group">
+								<label>Email</label>
+								<input type="email" class="form-control" id="email_register_input" name="email" placeholder="Email">
+								<span id="" class="help-block"></span>
+							</div>
+							<div class="form-group">
+								<label>出生日期</label>
+								<input class="form_datetime form-control" id="birthday_register_input" name="birthday" type="date" value="2016-03-07"
+								 size="16">
+								<span id="" class="help-block"></span>
+							</div>
+							<div class="form-group" id="province_register_div">
+								<label>所属省份</label>
+								<select class="form-control"  id="province_register_select" name="provinceId" placeholder="省份">
+								</select>
+								<span id="" class="help-block"></span>
+							</div>
+							<div class="form-group">
+								<label>所属院校</label>
+								<input type="text" class="form-control" id="collage_register_input" name="college" placeholder="学校">
+								<span id="" class="help-block"></span>
+							</div>
+							<div class="form-group">
+								<label>性别</label>
+								<select class="form-control" name="gender" id="gender_register_input">
+									<option value="M">男</option>
+									<option value="F">女</option>
+								</select>
+								<span id="" class="help-block"></span>
+							</div>
+							<div class="form-group">
+								<label>密码</label>
+								<input type="password" class="form-control" id="password_register_input" name="password" placeholder="Password">
+								<span id="" class="help-block"></span>
+							</div>
+							<div class="form-group">
+								<label>确认密码</label>
+								<input type="password" class="form-control" id="password1_register_input" name="password1" placeholder="Password1">
+								<span id="" class="help-block"></span>
+							</div>
+							<div class="form-group">
+								<label>验证码</label>
+								<input type="text" class="form-control" id="code_register_input" name="code" placeholder="验证码">
+								<button type="button" id="code_register_btn">发送验证码</button>
+								<span id="" class="help-block"></span>
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						<button type="button" class="btn btn-primary" id="register_btn">注册</button>
+					</div>
+				</div>
+			</div>
+		</div>
+					</li>
+					<li class="line">|</li>
+					<li>
+						<!-- <a href="#" data-toggle="modal" data-target="#loginModal"
+							id="loginBtn">
+							登录
+						</a> -->
+						<a href="login2">登录</a>
+						<!-- Modal -->
+						<div class="modal fade" id="loginModal" tabindex="-1" role="dialog"
+							aria-labelledby="myModalLabel">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal"
+											aria-label="Close"><span aria-hidden="true">&times;</span></button>
+										<h4 class="modal-title" id="myModalLabel">您好，欢迎登录 !</h4>
+									</div>
+									<div class="modal-body">
+										<form>
+											<div class="form-group">
+												<label>用户名: </label>
+												<input type="text" class="form-control" id="userName_login_input"
+													placeholder="请输入用户名" name="username">
+												<span id="" class="help-block"></span>
+											</div>
+											<div class="form-group">
+												<label>密&nbsp;&nbsp;&nbsp;码: </label>
+												<input type="password" class="form-control" id="password_login_input"
+													placeholder="请输入密码" name="password">
+												<span id="" class="help-block"></span>
+											</div>
+											<!-- <div class="form-group opt">
+												<label class="radio-inline">
+													<input type="radio" name="R" id="student" checked="true"
+														value="student"> 学生
+												</label>
+												<label class="radio-inline">
+													<input type="radio" name="R" id="teacher"
+														value="teacher"> 老师
+												</label>
+											</div> -->
+
+										</form>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-default btn-lg"
+											data-dismiss="modal">取消</button>
+										<button type="button" class="btn btn-primary btn-lg" id="login_btn">登录</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</li>
+				</ul>
+				<ul id="logined"	 class="login" th:style="'display:' + @{(${session.user!=null} ? 'block' : 'none')} + ''">
+					<li class="login-box">
+						<a href="userInfo.html">
+							<img src="../images/login-img.jpg" />
+						</a>
+
+						<div class="login-item" style="display: none">
+							<ul>
+								<li class="user-name" th:text="${session.user==null}?'':${session.user.username}">
+									
+								</li>
+								<li class="active2">
+									<a href="userInfo.html" class="active2">关于我</a>
+								</li>
+								<li>
+									<a href="#" th:href="@{/user/logout}">退出登录</a>
+								</li>
+							</ul>
+						</div>
+					</li>
+					<span>已登录 ！</span>
+				</ul>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>
+
+<!-- <script src="../../js/public.js"></script>  -->

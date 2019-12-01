@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>100分勤学网---经典课程</title>
+    <script type="text/javascript" src="../js/u-jquery-1.12.3.js"></script>
+    <link rel="stylesheet" href="../css/u-bootstrap.min.css">
+    <script type="text/javascript" src="../js/u-bootstrap.min.js"></script>
+    <script type="text/javascript" src="../js/public.js"></script>
+    <!-- <script type="text/javascript" src="../js/index.js"></script> -->
+    <link rel="stylesheet" href="../css/public.css">
+    <link rel="stylesheet" href="../css/course.css">
+    <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon" />
+    <!-- <link rel="import" href="./index.html"> -->
+    <script type="text/javascript" src="../js/course.js"></script>
+</head>
+
+<body>
+    <div id="page">
+        <!-- 头部 -->
+        <div class="headerpage" th:replace="commons/header::page2-header"></div>
+        <div class="w">
+            <!-- 中间部分 -->
+            <div class="page-con">
+                <div class="top">
+                    <i class="	glyphicon glyphicon-send"></i>
+                    <span><strong>经典课程</strong></span>
+                </div>
+                <div class="cour-container">
+                    <ul class="md-bd" id="classicUl">
+                        <!-- <li class="pics-box pull-left">
+                            <a href="#">
+                                <img src="../../images/zb1.png">
+                                <h4>
+                                    <span class="pics-tit">
+                                        jenkins技术应用
+                                    </span>
+                                </h4>
+                            </a>
+                        </li> -->
+                        <!-- <div style="clear: both"></div> -->
+                        <!-- <li class="pics-box pull-left">
+                            <a href="#">
+                                <img src="../../images/zb1.png">
+                                <h4>
+                                    <span class="pics-tit">
+                                        jenkins技术应用
+                                    </span>
+                                </h4>
+                            </a>
+
+                        </li> -->
+                        <!-- <li class="pics-box pull-left">
+                            <a href="#">
+                                <img src="../../images/zb1.png">
+                                <h4>
+                                    <span class="pics-tit">
+                                        jenkins技术应用
+                                    </span>
+                                </h4>
+                            </a>
+                        </li> -->
+                        <!-- <li class="pics-box pull-left">
+                            <a href="#">
+                                <img src="../../images/zb1.png">
+                                <h4>
+                                    <span class="pics-tit">
+                                        jenkins技术应用
+                                    </span>
+                                </h4>
+                            </a>
+                        </li> -->
+                        <!-- <li class="pics-box pull-left">
+                            <a href="#">
+                                <img src="../../images/zb1.png">
+                                <h4>
+                                    <span class="pics-tit">
+                                        jenkins技术应用
+                                    </span>
+                                </h4>
+                            </a>
+                        </li> -->
+                        <!-- <li class="pics-box pull-left">
+                            <a href="#">
+                                <img src="../../images/zb1.png">
+                                <h4>
+                                    <span class="pics-tit">
+                                        jenkins技术应用
+                                    </span>
+                                </h4>
+                            </a>
+                        </li> -->
+                        <!-- <li class="pics-box pull-left">
+                            <a href="#">
+                                <img src="../../images/zb1.png">
+                                <h4>
+                                    <span class="pics-tit">
+                                        jenkins技术应用
+                                    </span>
+                                </h4>
+                            </a>
+                        </li> -->
+                        <!-- <li class="pics-box pull-left">
+                            <a href="#">
+                                <img src="../../images/zb1.png">
+                                <h4>
+                                    <span class="pics-tit">
+                                        jenkins技术应用
+                                    </span>
+                                </h4>
+                            </a>
+                        </li> -->
+                        <!-- <li class="pics-box pull-left">
+                            <a href="#">
+                                <img src="../../images/zb1.png">
+                                <h4>
+                                    <span class="pics-tit">
+                                        jenkins技术应用
+                                    </span>
+                                </h4>
+                            </a>
+                        </li>
+                        <li class="pics-box pull-left">
+                            <a href="#">
+                                <img src="../../images/zb1.png">
+                                <h4>
+                                    <span class="pics-tit">
+                                        jenkins技术应用
+                                    </span>
+                                </h4>
+                            </a>
+                        </li> -->
+                        <!-- <li class="pics-box pull-left">
+                            <a href="#">
+                                <img src="../../images/zb1.png">
+                                <h4>
+                                    <span class="pics-tit">
+                                        jenkins技术应用
+                                    </span>
+                                </h4>
+                            </a>
+                        </li> -->
+                        <!-- <li class="pics-box pull-left">
+                            <a href="#">
+                                <img src="../../images/zb1.png">
+                                <h4>
+                                    <span class="pics-tit">
+                                        jenkins技术应用
+                                    </span>
+                                </h4>
+                            </a>
+                        </li> -->
+                        <!-- <li class="pics-box pull-left">
+                            <a href="#">
+                                <img src="../../images/zb1.png">
+                                <h4>
+                                    <span class="pics-tit">
+                                        jenkins技术应用
+                                    </span>
+                                </h4>
+                            </a>
+                        </li> -->
+                    </ul>
+                </div>
+                <!-- <div class="page-division">
+                <ul class="pager">
+                    <li><a href="#"> < 上一页 </a></li>
+                    <li><a href="#"> 下一页 > </a></li>
+                </ul>
+            </div> -->
+            </div>
+        </div>
+
+        <!-- 尾部 -->
+        <div class="footerpage" th:replace="commons/footer::footer"></div>
+    </div>
+
+
+</body>
+<script>
+    $.ajax({
+        url: "/course/classicCourse",
+        type: "get",
+        dataType: "json",
+        data: {},
+        success: function (result) {
+            if (result.code == 100) {
+            	$.each(result.map.course,function () {
+	                var id = this.courseId
+	                var imgSrc = this.courseImgUrl
+	                var name = this.courseName
+	                var aEle = $("<a></a>").attr("href", "courseDetail.html?id=" + id);
+	                var imgEle = $("<img></img>").attr("src", "../images/" + imgSrc);
+	                var spanEle = $("<span></span>").append(name).addClass("pics-tit");
+	                var liEle = $("<li></li>").addClass("pics-box pull-left");
+	                var hEle = $("<h4></h4>")
+	                hEle.append(spanEle)
+	                aEle.append(imgEle).append(hEle)
+	                liEle.append(aEle)
+	                $("#classicUl").append(liEle);
+            	})
+            }
+
+        }
+    })
+
+</script>
+
+</html>

@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>100分勤学网---我的信息</title>
+    <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon" />
+    <script type="text/javascript" src="../js/u-jquery-1.12.3.js"></script>
+    <script type="text/javascript" src="../js/u-bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../css/u-bootstrap.min.css">
+    <script type="text/javascript" src="../js/public.js"></script>
+    <link rel="stylesheet" href="../css/public.css">
+    <link rel="stylesheet" href="../css/userInfo.css">
+    <script type="text/javascript" src="../js/userInfo.js"></script>
+</head>
+
+<body>
+    <div id="page">
+        <!-- 头部 -->
+        <div class="headerpage" th:replace="commons/header::page2-header"></div>
+        <div class="w">
+            <!-- 中间信息栏 -->
+            <div class="userinfo-container">
+                <div class="info-bg"> </div>
+                <div class="info-body">
+                    <div class="user-img"></div>
+                    <div class="info-name">
+                        <span>
+                            亲爱的
+                        </span>
+                        <span  id="span_name" class="name" >
+                           
+                        </span>
+                        <span>
+                            ，欢迎回来 ！
+                        </span>
+                    </div>
+                    <div class="info-left" id="info-left">
+                        <ul class="info-left-ul">
+                            <li id="info" class="active5">
+                                <a href="#" data-toggle="tab">我的信息</a>
+                                <i class="glyphicon glyphicon-chevron-right" style="display: block"></i>
+                            </li>
+                            <!-- <li>
+                            <a href="#history" data-toggle="tab">播放记录</a>
+                            <i class="glyphicon glyphicon-chevron-right" style="display: none"></i>
+                        </li> -->
+                            <li id="collection">
+                                <a href="#" data-toggle="tab">我的收藏</a>
+                                <i class="glyphicon glyphicon-chevron-right" style="display: none"></i>
+                            </li>
+                            <li id="modify">
+                                <a href="#" data-toggle="tab">修改密码</a>
+                                <i class="glyphicon glyphicon-chevron-right" style="display: none"></i>
+                            </li>
+                            <!-- <li></li> -->
+                        </ul>
+
+                    </div>
+                    <div class="info-right" id="info-right">
+                        <div class="tab-content info-right">
+                            <i class="glyphicon glyphicon-paperclip"></i>
+                            <div class="tab-pane active" id="info-box">
+                                <div class="tab-head">
+                                    <span>我的信息</span>
+                                </div>
+                                <div class="tab-body" id="user-box2">
+                                    <p>
+                                        用&nbsp;&nbsp;户&nbsp;&nbsp;名：
+                                        <span id="Uname"></span>
+                                    </p>
+                                    <p>
+                                        性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别：
+                                        <span id="gender"></span>
+                                    </p>
+                                   <!--  <p>
+                                        真实姓名：
+                                        <span></span>
+                                    </p> -->
+
+                                    <p>
+                                        出生日期：
+                                        <span id="birthday"></span>
+                                    </p>
+                                    <p>
+                                        我的邮箱：
+                                        <span id="myemail"></span>
+                                    </p>
+                                    <p>
+                                        所在学校：
+                                        <span id="school"></span>
+                                    </p>
+                                    <p>
+                                       所在省份：
+                                        <span id="province"></span>
+                                    </p>
+                                    <p>
+                                        注册时间：
+                                        <span id="logintime"></span>
+                                    </p>
+                                    <div class="modify-info">
+                                        <button type="button" class="btn btn-primary btn-lg modify-btn"
+                                            data-toggle="modal" data-target="#changeModal" id="changeBtn">
+                                            修改信息
+                                        </button>
+                                        <!-- Modal -->
+                                        <div class="modal fade modify-box" id="changeModal" tabindex="-1" role="dialog"
+                                            aria-labelledby="myModalLabel">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close"><span
+                                                                aria-hidden="true">&times;</span></button>
+                                                        <h4 class="modal-title" id="myModalLabel">修改信息</h4>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form>
+                                                            <div class="form-group">
+                                                                <label>用&nbsp;&nbsp;户&nbsp;&nbsp;名：</label>
+                                                                <input type="text" class="form-control"
+                                                                    id="login_input">
+                                                                <span id="" class="help-block"></span>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别：</label>
+                                                                <input type="text" class="form-control"
+                                                                    id="gender_login_input" disabled="disabled">
+                                                                <span id="" class="help-block"></span>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>出生日期：</label>
+                                                                <input type="text" class="form-control"
+                                                                    id="birthday_login_input" disabled="disabled">
+                                                                <span id="" class="help-block"></span>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>我的邮箱：</label>
+                                                                <input type="text" class="form-control"
+                                                                    id="mail_login_input" disabled="disabled">
+                                                                <span id="" class="help-block"></span>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>所在学校：</label>
+                                                                <input type="text" class="form-control"
+                                                                    id="school_login_input">
+                                                                <span id="" class="help-block"></span>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>联系地址：</label>
+                                                                <input type="text" class="form-control"
+                                                                    id="address_login_input" disabled="disabled">
+                                                                <span id="" class="help-block"></span>
+                                                            </div>
+
+                                                        </form>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-default"
+                                                            data-dismiss="modal">取消</button>
+                                                        <button type="button" class="btn btn-primary"
+                                                            id="change_btn">确认修改</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!-- <div class="tab-pane active" id="history">
+                                <div class="tab-head">
+                                    <span>播放记录</span>
+                                </div>
+                                <div class="tab-body">
+                                    <ul>
+                                        <li>
+                                            <a href="">
+                                                <img src="../../images/zb1.png"/>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="">
+                                                <img src="../../images/zb1.png"/>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="">
+                                                <img src="../../images/zb1.png"/>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="">
+                                                <img src="../../images/zb1.png"/>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="">
+                                                <img src="../../images/zb1.png"/>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div> -->
+                            <div class="tab-pane" id="collection-box">
+                                <div class="tab-head">
+                                    <span>我的收藏<i class="glyphicon glyphicon-star"></i></span>
+                                    <div class="tab-body">
+                                        <ul id="collectionUl">
+                                            <!-- <li>
+                                                <a href="courseDetail.html?id=10">
+                                                    <img src="../../images/zb1.png" />
+                                                    <h5>jinkens技术应用</h5>
+                                                </a>
+                                            </li> -->
+                                            <!-- <li class="delete-box">
+                                                    <a class="delete" href="javascript:;">删除</a>
+                                            </li> -->
+                                            <!-- <li>
+                                                <a href="">
+                                                    <img src="../../images/zb1.png" />
+                                                    <h5>jinkens技术应用</h5>
+                                                </a>
+                                            </li> -->
+                                            <!-- <li class="delete-box">
+                                                    <a class="delete" href="javascript:;">删除</a>
+                                            </li> -->
+                                            <!-- <li>
+                                                <a href="">
+                                                    <img src="../../images/zb1.png" />
+                                                    <h5>jinkens技术应用</h5>
+                                                </a>
+                                            </li> -->
+                                            <!-- <li class="delete-box">
+                                                    <a class="delete" href="javascript:;">删除</a>
+                                            </li> -->
+                                            <!-- <li>
+                                                <a href="">
+                                                    <img src="../../images/zb1.png" />
+                                                    <h5>jinkens技术应用</h5>
+                                                </a>
+                                            </li> -->
+                                            <!-- <li class="delete-box">
+                                                    <a class="delete" href="javascript:;">删除</a>
+                                            </li> -->
+                                            <!-- <li>
+                                                <a href="">
+                                                    <img src="../../images/zb1.png" />
+                                                    <h5>jinkens技术应用</h5>
+                                                </a>
+                                            </li> -->
+                                            <!-- <li class="delete-box">
+                                                    <a class="delete" href="javascript:;">删除</a>
+                                            </li> -->
+                                            <!-- <li>
+                                                <a href="">
+                                                    <img src="../../images/zb1.png" />
+                                                    <h5>jinkens技术应用</h5>
+                                                </a>
+                                            </li> -->
+                                            <!-- <li class="delete-box">
+                                                    <a class="delete" href="javascript:;">删除</a>
+                                            </li> -->
+                                            <!-- <li>
+                                                <a href="">
+                                                    <img src="../../images/zb1.png" />
+                                                    <h5>jinkens技术应用</h5>
+                                                </a>
+                                            </li> -->
+                                            <!-- <li class="delete-box">
+                                                    <a class="delete" href="javascript:;">删除</a>
+                                            </li> -->
+                                            <!-- <li>
+                                                <a href="">
+                                                    <img src="../../images/zb1.png" />
+                                                    <h5>jinkens技术应用</h5>
+                                                </a>
+                                            </li> -->
+                                            <!-- <li class="delete-box">
+                                                    <a class="delete" href="javascript:;">删除</a>
+                                            </li> -->
+                                            <!-- <li>
+                                                <a href="">
+                                                    <img src="../../images/zb1.png" />
+                                                    <h5>jinkens技术应用</h5>
+                                                </a>
+                                            </li> -->
+                                            <!-- <li class="delete-box">
+                                                    <a class="delete" href="javascript:;">删除</a>
+                                            </li> -->
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane " id="modify-box">
+                                <div class="tab-head">
+                                    <span>修改密码</span>
+                                </div>
+                                <div class="tab-body">
+                                    <form class="form-horizontal">
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">用户名：</label>
+                                            <div class="col-sm-10">
+                                                <p id="p_name" class="form-control-static" th:text="${session.user.username}"></p>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="oldPassword" class="col-sm-2 control-label">原密码：</label>
+                                            <div class="col-sm-3">
+                                                <input type="password" class="form-control" id="oldPassword"
+                                                    placeholder="请输入原密码">
+                                                    <span>
+                                                    </span>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <label for="newPassword" class="col-sm-2 control-label">新密码：</label>
+                                            <div class="col-sm-3">
+                                                <input type="password" class="form-control" id="newPassword"
+                                                    placeholder="请输入新密码">
+                                                     <span>
+                                                    </span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="againPassword" class="col-sm-2 control-label">确认新密码：</label>
+                                            <div class="col-sm-3">
+                                                <input type="password" class="form-control" id="againPassword"
+                                                    placeholder="请确认新密码">
+                                                     <span>
+                                                    </span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-sm-offset-2 col-sm-10">
+                                                <button type="button" class="btn btn-primary" id="changepassword">确认修改</button>
+                                            </div>
+                                        </div>
+                                    </form>
+
+                                </div>
+                            </div>
+                            <!-- <div class="tab-pane" id="set">set</div> -->
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!-- 尾部 -->
+        <div class="footerpage" th:replace="commons/footer::footer"></div>
+        <input id="usersession" type="hidden" th:value="${session.user.userId}" />
+        </div>
+    </div>
+</body>
+<script th:inline="javascript">
+var userId=$("#usersession").val();
+//个人信息
+var userUrl=window.location.href;
+var userId=userUrl.split('=')[1];
+$.ajax({
+    url:'/user/findById',
+    type:'get',
+    data:{
+        "userId":$("#usersession").val()
+    },
+    dataType:'json',
+    success:function(result){
+        if(result.code==100){
+            $('#Uname').append(result.map.msg.username);
+            $('#span_name').text(result.map.msg.username);
+            if(result.map.msg.gender=='M'){
+                result.map.msg.gender='男'
+            }else{
+                result.map.msg.gender='女'
+            }
+            $('#user-box2 p span').eq(1).append(result.map.msg.gender);
+            $('#user-box2 p span').eq(2).append(result.map.msg.birthday);
+            $('#user-box2 p span').eq(3).append(result.map.msg.email);
+            $('#user-box2 p span').eq(4).append(result.map.msg.college);
+            $('#user-box2 p span').eq(5).append(result.map.msg.province.provinceName);
+            $('#user-box2 p span').eq(6).append(result.map.msg.createtime);
+        }
+    }
+})
+
+// 收藏夹
+$.ajax({
+    url:'/userCollect/collectInfo',
+    type:'get',
+    dataType:'json',
+    data:{
+        "userId":$("#usersession").val()
+    },
+    success:function(result){
+        $.each(result.map.msg,function(){
+            var collectID=this.courseId;
+            var collectSrc=this.courseImgUrl;
+            var collectName=this.courseName;
+            var li=$('<li></li>');
+            var a=$('<a></a>').attr('href','courseDetail.html?id='+collectID);
+            var img=$('<img></img>').attr('src','../images/'+collectSrc);
+            var h5=$('<h5></h5>').append(collectName);
+            a.append(img).append(h5);
+            li.append(a);
+            $('#collectionUl').append(li);
+        })
+    }
+})
+//修改信息
+$("#changeBtn").click(function(){
+	var name=$("#Uname").text();
+	var gender=$("#gender").text();
+	var birth=$("#birthday").text();
+	var email=$("#myemail").text();
+	var school=$("#school").text();
+	var province=$("#province").text();
+	$("#login_input").val(name);
+	$("#gender_login_input").val(gender);
+	$("#birthday_login_input").val(birth);
+	$("#mail_login_input").val(email);
+	$("#school_login_input").val(school);
+	$("#address_login_input").val(province);
+});
+$("#change_btn").click(function(){
+	var username=$("#login_input").val();
+	var school=$("#school_login_input").val();
+	$.ajax({
+		url:"user/check",
+		data:"username="+username,
+		type:"POST",
+		success:function(result){
+			if (result.code==100) {
+				show_validate_msg("#login_input","success",result.map.msg);
+				$.ajax({
+					url:"/user/updata",
+					type:"get",
+					data:{
+						"username":username,
+						"college":school,
+					},
+					success:function(result){
+						if (result.code==100) {
+							alert("信息修改成功!");
+						//修改成功后，关闭模态框,
+							$("#changeModal").modal('hide');
+							location.reload(); 
+							/* $("#span_name").text("username"); */
+						}
+						else{
+							alert("信息修改失败");
+						}
+					}
+				});
+			} else {
+				show_validate_msg("#login_input","error",result.map.msg);
+				return false;
+			}
+		}
+	});
+	
+});
+function show_validate_msg(element,status,msg) {
+	//清除当前元素的校验状态
+	$(element).parent().removeClass("has-success has-error");
+	$(element).next('span').text("");
+	
+	if ("success"==status) {
+		$(element).parent().addClass("has-success");
+		$(element).next("span").text(msg);
+	} else if ("error"==status) {
+		$(element).parent().addClass("has-error");
+		$(element).next("span").text(msg);
+	}
+}
+$("#changepassword").click(function(){
+	var oldPassword=$("#oldPassword").val();
+	var newPassword=$("#newPassword").val();
+	var againPassword=$("#againPassword").val();
+	$.ajax({
+		url:"user/login",
+		type:"GET",
+		data:{
+			"username":$("#p_name").text(),
+			"password":oldPassword
+		},
+		success:function(result){
+			if (result.code==100) {
+				show_validate_msg("#oldPassword","success","密码正确!");
+				return true;
+			}
+			else if(result.code==200){
+				show_validate_msg("#oldPassword","error","密码错误!");
+				return false;
+				}
+			}
+	});
+	if(newPassword==againPassword){
+		show_validate_msg("#newPassword","error","两次密码一致!");
+		show_validate_msg("#againPassword","error","两次密码一致!");
+		$.ajax({
+			url:"/user/updatePassword",
+			type:"POST",
+			data:{
+				"password":oldPassword,
+				"newpassword":newPassword
+			},
+			success:function(result){
+				if(result.code==100){
+					alert("密码修成功!");
+					$("#oldPassword").val("");
+					$("#newPassword").val("");
+					$("#againPassword").val("");
+				}
+				else{
+					alert(result.msg);
+				}
+			}
+		});
+	}
+	else{
+		show_validate_msg("#newPassword","error","两次密码输入不一致!");
+		show_validate_msg("#againPassword","error","两次密码输入不一致!");
+		return false;
+	}
+	
+});
+</script>
+
+</html>

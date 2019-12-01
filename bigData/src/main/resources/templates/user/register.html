@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link rel="stylesheet" href="css/bootstrap.min.css" />
+		<script type="text/javascript" src="../js/jquery-1.12.4.js"></script>
+		<script type="text/javascript" src="../js/bootstrap.js"></script>
+		<link href="../css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+		<script src="../js/bootstrap-datetimepicker.min.js"></script>
+		<script src="../js/bootstrap-datetimepicker.zh-CN.js"></script>
+	</head>
+	<body>
+		<!-- Button trigger modal -->
+		<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#registerModal" id="registerBtn">
+			注册
+		</button>
+
+		<!-- Modal -->
+		<div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="myModalLabel">注册界面</h4>
+					</div>
+					<div class="modal-body">
+						<form id="register_form">
+							<div class="form-group">
+								<label>用户名</label>
+								<input type="text" class="form-control" id="userName_register_input" name="username" placeholder="username">
+								<span id="" class="help-block"></span>
+							</div>
+							<div class="form-group">
+								<label>Email</label>
+								<input type="email" class="form-control" id="email_register_input" name="email" placeholder="Email">
+								<span id="" class="help-block"></span>
+							</div>
+							<div class="form-group">
+								<label>出生日期</label>
+								<input class="form_datetime form-control" id="birthday_register_input" name="birthday" type="date" value="2016-03-07"
+								 size="16">
+								<span id="" class="help-block"></span>
+							</div>
+							<div class="form-group" id="province_register_div">
+								<label>所属省份</label>
+								<select class="form-control"  id="province_register_select" name="provinceId" placeholder="省份">
+								</select>
+								<span id="" class="help-block"></span>
+							</div>
+							<div class="form-group">
+								<label>所属院校</label>
+								<input type="text" class="form-control" id="collage_register_input" name="college" placeholder="学校">
+								<span id="" class="help-block"></span>
+							</div>
+							<div class="form-group">
+								<label>性别</label>
+								<select class="form-control" name="gender" id="gender_register_input">
+									<option value="F">男</option>
+									<option value="M">女</option>
+								</select>
+								<span id="" class="help-block"></span>
+							</div>
+							<div class="form-group">
+								<label>密码</label>
+								<input type="password" class="form-control" id="password_register_input" name="password" placeholder="Password">
+								<span id="" class="help-block"></span>
+							</div>
+							<div class="form-group">
+								<label>确认密码</label>
+								<input type="password" class="form-control" id="password1_register_input" name="password1" placeholder="Password1">
+								<span id="" class="help-block"></span>
+							</div>
+							<div class="form-group">
+								<label>验证码</label>
+								<input type="text" class="form-control" id="code_register_input" name="code" placeholder="验证码">
+								<button type="button" id="code_register_btn">发送验证码</button>
+								<span id="" class="help-block"></span>
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						<button type="button" class="btn btn-primary" id="register_btn">注册</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script>
+	$(document).on("click","#registerBtn",function(){
+		//获取省份名称
+		$.ajax({
+			url:"/province/queryAll",
+			type:"POST",
+			success:function(result){
+					if(result.code==100){
+						$.each(result.map.province,function(){
+							var optionEle=$("<option></option>").append(this.provinceName).attr("value",this.provinceId);
+							optionEle.appendTo("#province_register_select");
+						});
+					}
+					else{
+						var msg=result.msg;
+					}
+			}
+		});
+	});
+		//表单重置
+		$("#registerBtn").click(function() {
+			$("#registerModal form")[0].reset();
+		});
+		/* //发送验证码
+		$("#code_register_btn").click(function() {
+			var email = $("#email_register_input").val();
+			$.ajax({
+				url: "user/getCheckCode",
+				data: "email=" + email,
+				type: "POST",
+				success: function(result) {
+					if (result.code == 100) {
+						show_validate_msg("#code_register_btn","success",result.extend.msg);
+					} else if (result.code == 200) {
+						show_validate_msg("#code_register_btn","success",result.extend.msg);
+					}
+				}
+			});
+		}); */
+
+		function show_validate_msg(element,status,msg) {
+			//清除当前元素的校验状态
+			$(element).parent().removeClass("has-success has-error");
+			$(element).next('span').text("");
+			
+			if ("success"==status) {
+				$(element).parent().addClass("has-success");
+				$(element).next("span").text(msg);
+			} else if ("error"==status) {
+				$(element).parent().addClass("has-error");
+				$(element).next("span").text(msg);
+			}
+		}
+		//校验用户名是否可用
+		$("#userName_register_input").change(function(){			
+			var userName=this.value;
+			$.ajax({
+				url:"user/check",
+				data:"username="+userName,
+				type:"POST",
+				success:function(result){
+					if (result.code==100) {
+						show_validate_msg("#userName_register_input","success",result.map.msg);
+						$("#register_btn").attr("ajax-val","success");
+					} else {
+						show_validate_msg("#userName_register_input","error",result.map.msg);
+						$("#register_btn").attr("ajax-val","error");
+					}
+				}
+			});
+			
+		});
+		//校验邮箱
+		$("#email_register_input").change(function(){	
+			var email=$("#email_register_input").val();
+			var regEmail=/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/;
+			if(!regEmail.test(email)){
+				show_validate_msg("#email_register_input","error","邮箱格式错误!");
+			}else{
+				show_validate_msg("#email_register_input","success","");
+			}
+		});
+		//校验密码是否一致
+		$("#password1_register_input").change(function(){
+			var password1=this.value;
+			var password=$("#password_register_input").val();
+			if(password!==password1){
+				show_validate_msg("#password_register_input","success","前后密码输入不一致!");
+				show_validate_msg("#password1_register_input","success","前后密码输入不一致!");
+			}
+			else{
+				show_validate_msg("#password_register_input","success","");
+				show_validate_msg("#password1_register_input","success","");
+			}
+		});
+
+		//校验方法，表单数据
+		function validate_register_form(){
+			//拿到要校验的数据
+			//校验用户名
+			var userName=$("#userName_register_input").val();
+			var regName=/(^[\u4E00-\u9FA5]{2,5}$)|(^[a-z0-9_-]{4,16}$)/;
+			if(!regName.test(userName)){
+				//alert("用户名必须满足2~5个汉字或6~16个字符");
+				show_validate_msg("#userName_register_input","error","用户名必须是2~5个汉字或4~16个字符");
+				return false;
+			}else{
+				show_validate_msg("#userName_register_input","success","");
+			}
+			
+			/* //校验邮箱
+			var email=$("#email_register_input").val();
+			var regEmail= /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
+			if(!regEamil.test(email)){
+				show_validate_msg("#email_register_input","error","邮箱格式错误!");
+				return false;
+			}else{
+				show_validate_msg("#email_register_input","success","");
+			} */
+			//校验验证码
+			var code=$("#code_register_input").val();
+			if(code==null){
+				show_validate_msg("#code_register_input","error","请输入验证码!!");
+				return false;
+			}
+			return true;
+		}
+		//点击注册,校验数据
+		$("#register_btn").click(function(){
+			//模态框中的数据提交到服务器
+			//先对数据进行校验
+			if(!validate_register_form()){
+				return false;
+			}
+			
+			/* //判断ajax用户名校验是否成功
+			if ($(this).attr("ajax-val")=="error") {
+				return false;
+			} */
+			//发送ajax请求，保存
+			//序列化表单serialize()
+			$.ajax({
+				url:"/user/regist",
+				type:"POST",
+				data:$("#registerModal form").serialize(),
+				success:function(result){
+					if (result.code==100) {
+					//保存成功后，关闭模态框,跳转到主页
+						$("#registerModal").modal('hide');
+					}
+					else {
+						//显示失败信息
+						//有哪个字段的错误信息就显示哪个信息
+						/* if(undefined !=result.extend.errorFields.username){
+							//显示用户名错误信息
+							show_validate_msg("#username_register_input","error",result.extend.errorFields.username);
+						}
+						if(undefined !=result.extend.errorFields.password){
+							//显示密码错误信息
+							show_validate_msg("#password_register_input","error",result.extend.errorFields.password);
+						} */
+					}
+						
+				}
+			});
+			
+			
+		});
+	</script>
+</html>

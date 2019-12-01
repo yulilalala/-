@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+
+	
+
+  <context id="DB2Tables" targetRuntime="MyBatis3">
+  	<commentGenerator>
+  		<property name="suppressAllComments" value="true" />
+	</commentGenerator>
+    <jdbcConnection 
+    	driverClass="com.mysql.jdbc.Driver"
+        connectionURL="jdbc:mysql://47.100.105.10:3306/bigdata?useSSL=false"
+        userId="root"
+        password="123456">
+    </jdbcConnection>
+
+    <javaTypeResolver >
+      <property name="forceBigDecimals" value="false" />
+    </javaTypeResolver>
+
+	<!--指定javaBean生成的位置  -->
+    <javaModelGenerator 
+    	targetPackage="com.pxxy.bigData.bean"
+    	targetProject=".\src\main\java">
+      <property name="enableSubPackages" value="true" />
+      <property name="trimStrings" value="true" />
+    </javaModelGenerator>
+
+	<!-- 指定sql映射文件位置 -->
+    <sqlMapGenerator 
+    	targetPackage="com.pxxy.bigData.mapper"
+    	targetProject=".\src\main\java">
+      <property name="enableSubPackages" value="true" />
+    </sqlMapGenerator>
+
+	<!--指定dao接口生成的位置，mapper接口  -->
+    <javaClientGenerator type="XMLMAPPER" 
+    	targetPackage="com.pxxy.bigData.mapper"
+    	targetProject=".\src\main\java">
+      <property name="enableSubPackages" value="true" />
+    </javaClientGenerator>
+
+
+	<!-- table指定每个表的生成策略 -->
+		<!-- <table tableName="t_user" domainObjectName="User"
+			enableCountByExample="false" enableDeleteByExample="false"
+			enableSelectByExample="false" enableUpdateByExample="false" />
+		<table tableName="t_admin" domainObjectName="Admin"
+			enableCountByExample="false" enableDeleteByExample="false"
+			enableSelectByExample="false" enableUpdateByExample="false" />
+		<table tableName="t_classify" domainObjectName="Classify"
+			enableCountByExample="false" enableDeleteByExample="false"
+			enableSelectByExample="false" enableUpdateByExample="false" />
+		<table tableName="t_collection" domainObjectName="Collection"
+	      enableCountByExample="false" enableDeleteByExample="false"
+	      enableSelectByExample="false" enableUpdateByExample="false" />
+	     <table tableName="t_course" domainObjectName="Course"
+	      enableCountByExample="false" enableDeleteByExample="false"
+	      enableSelectByExample="false" enableUpdateByExample="false" />
+	     <table tableName="t_province" domainObjectName="Province"
+	      enableCountByExample="false" enableDeleteByExample="false"
+	      enableSelectByExample="false" enableUpdateByExample="false" />
+	     <table tableName="t_teacher" domainObjectName="Teacher"
+	      enableCountByExample="false" enableDeleteByExample="false"
+	      enableSelectByExample="false" enableUpdateByExample="false" />
+	     <table tableName="t_video" domainObjectName="Video"
+	      enableCountByExample="false" enableDeleteByExample="false"
+	      enableSelectByExample="false" enableUpdateByExample="false" /> 
+	     <table tableName="t_usercollect" domainObjectName="UserCollect"
+	      enableCountByExample="false" enableDeleteByExample="false"
+	      enableSelectByExample="false" enableUpdateByExample="false" /> -->
+	      <table tableName="t_flowmeter" domainObjectName="Flowmeter"
+	      enableCountByExample="false" enableDeleteByExample="false"
+	      enableSelectByExample="false" enableUpdateByExample="false" />
+  </context>
+</generatorConfiguration>

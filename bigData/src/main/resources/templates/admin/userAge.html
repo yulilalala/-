@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<!-- saved from url=(0053)https://getbootstrap.com/docs/4.3/examples/dashboard/ -->
+<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta name="description" content="">
+		<meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+		<meta name="generator" content="Jekyll v3.8.5">
+		<title>用户年龄对比</title>
+
+		<!-- <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/dashboard/"> -->
+
+		<!-- Bootstrap core CSS -->
+		<link href="../css/bootstrap.min.css" rel="stylesheet">
+
+		<link href="../css/dashboard.css" rel="stylesheet">
+	</head>
+	<body>
+<!--		引入抽取的topbar-->
+    <div th:replace="commons/bar::topbar"></div>
+		<div class="container-fluid">
+			<div class="row">
+				<!--				引入侧边栏-->
+                <div th:replace="~{commons/bar::#sidebar(activeUri='userAge.html')}"></div>
+
+				<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+
+					<canvas id="myChart" width="1522" height="642" style="display: block; height: 514px; width: 1218px;"></canvas>
+					<button type="button" id="exportBtn">导出数据</button>
+					<div class="table-responsive">
+					</div>
+				</main>
+			</div>
+		</div>
+		<script src="../js/jquery-1.12.4.js"></script>
+		<script src="../js/bootstrap.bundle.min.js"></script>
+		<script src="../js/feather.min.js"></script>
+		<script src="../js/echarts.js"></script>
+		<script>
+		//获取数据
+		var xage=["00后","90后","80后","70后"];
+		$.ajax({
+			url:"/agedistribution",
+			type:"post",
+			success:function(result){
+				if(result.code==100){
+					/* result.map.age.grade1;
+					result.map.age[0].grade2;
+					result.map.age[0].grade3;
+					result.map.age[0].grade4;
+					result.map.age[0].grade5; */
+					// 基于准备好的dom，初始化echarts实例
+					var myChart = echarts.init(document.getElementById('myChart'));
+					
+					// 指定图表的配置项和数据
+					var option = {
+							calculable: false,
+							title: {
+								text: '用户年龄比率',
+								x: 'center',
+								textStyle: {
+									"color": "#8ECBFF"
+								},
+							},
+							legend: {
+								top: 25,
+								data: xage,
+								textStyle: { //图例文字的样式
+									color: '#8ECBFF',
+									fontSize: 16
+								}
+							},
+							series: [{
+								type: 'pie',
+								radius: '65%',
+								center: ['50%', '63%'],
+								label: { //饼图图形上的文本标签
+									normal: {
+										show: true,
+										textStyle: {
+											fontWeight: 700,
+											fontSize: 16 //文字的字体大小
+										},
+										formatter: '{b}:{c}: ({d}%)',
+									}
+								},
+								data: [{
+									value: result.map.age[0].grade2,
+									name: '00后',
+									itemStyle: {
+										normal: {
+											color: '#4EC7B8'
+										}
+									}
+								},{
+									value: result.map.age[0].grade3,
+									name: '90后',
+									itemStyle: {
+										normal: {
+											color: '#90C9F6'
+										}
+									}
+								},{
+									value: result.map.age[0].grade4,
+									name: '80后',
+									itemStyle: {
+										normal: {
+											color: '#CACACB'
+										}
+									}
+								},{
+									value: result.map.age[0].grade5,
+									name: '70后',
+									itemStyle: {
+										normal: {
+											color: '#F4AA61'
+										}
+									}
+								}
+						]	
+					}]
+				};
+					
+					// 使用刚指定的配置项和数据显示图表。
+					myChart.setOption(option);
+			}	
+				
+			}	
+		}); 
+		$("#exportBtn").click(function(){
+			window.location.href='/exporCourseInfoExcels';
+		});
+		</script>
+	</body>
+</html>

@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pxxy.bigData.mapper.FlowmeterMapper">
+  <resultMap id="BaseResultMap" type="com.pxxy.bigData.bean.Flowmeter">
+    <id column="
+
+
+flowmeter_id" jdbcType="INTEGER" property="
+
+
+flowmeterId" />
+    <result column="
+
+
+user_id" jdbcType="VARCHAR" property="
+
+
+userId" />
+    <result column="loginTime" jdbcType="TIMESTAMP" property="logintime" />
+    <result column="exitTime" jdbcType="TIMESTAMP" property="exittime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    
+
+
+flowmeter_id, 
+
+
+user_id, loginTime, exitTime
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_flowmeter
+    where 
+
+
+flowmeter_id = #{
+
+
+flowmeterId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_flowmeter
+    where 
+
+
+flowmeter_id = #{
+
+
+flowmeterId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.pxxy.bigData.bean.Flowmeter">
+    insert into t_flowmeter (
+
+
+flowmeter_id, 
+
+
+user_id, 
+      loginTime, exitTime)
+    values (#{
+
+
+flowmeterId,jdbcType=INTEGER}, #{
+
+
+userId,jdbcType=VARCHAR}, 
+      #{logintime,jdbcType=TIMESTAMP}, #{exittime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.pxxy.bigData.bean.Flowmeter">
+    insert into t_flowmeter
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="
+
+
+flowmeterId != null">
+        
+
+
+flowmeter_id,
+      </if>
+      <if test="
+
+
+userId != null">
+        
+
+
+user_id,
+      </if>
+      <if test="logintime != null">
+        loginTime,
+      </if>
+      <if test="exittime != null">
+        exitTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="
+
+
+flowmeterId != null">
+        #{
+
+
+flowmeterId,jdbcType=INTEGER},
+      </if>
+      <if test="
+
+
+userId != null">
+        #{
+
+
+userId,jdbcType=VARCHAR},
+      </if>
+      <if test="logintime != null">
+        #{logintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="exittime != null">
+        #{exittime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pxxy.bigData.bean.Flowmeter">
+    update t_flowmeter
+    <set>
+      <if test="
+
+
+userId != null">
+        
+
+
+user_id = #{
+
+
+userId,jdbcType=VARCHAR},
+      </if>
+      <if test="logintime != null">
+        loginTime = #{logintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="exittime != null">
+        exitTime = #{exittime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where 
+
+
+flowmeter_id = #{
+
+
+flowmeterId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pxxy.bigData.bean.Flowmeter">
+    update t_flowmeter
+    set 
+
+
+user_id = #{
+
+
+userId,jdbcType=VARCHAR},
+      loginTime = #{logintime,jdbcType=TIMESTAMP},
+      exitTime = #{exittime,jdbcType=TIMESTAMP}
+    where 
+
+
+flowmeter_id = #{
+
+
+flowmeterId,jdbcType=INTEGER}
+  </update>
+</mapper>

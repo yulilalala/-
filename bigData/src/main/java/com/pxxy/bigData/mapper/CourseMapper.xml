@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pxxy.bigData.mapper.CourseMapper">
+  <resultMap id="BaseResultMap" type="com.pxxy.bigData.bean.Course">
+    <id column="course_id" jdbcType="INTEGER" property="courseId" />
+    <result column="course_name" jdbcType="VARCHAR" property="courseName" />
+    <result column="course_introduction" jdbcType="VARCHAR" property="courseIntroduction" />
+    <result column="teacher_id" jdbcType="INTEGER" property="teacherId" />
+    <result column="course_img_url" jdbcType="VARCHAR" property="courseImgUrl" />
+    <result column="classify_id" jdbcType="INTEGER" property="classifyId" />
+    <result column="video_id" jdbcType="INTEGER" property="videoId" />
+    <result column="uploadDate" jdbcType="DATE" property="uploaddate" />
+    <result column="praiseCount" jdbcType="INTEGER" property="praisecount" />
+    <result column="classic" jdbcType="VARCHAR" property="classic" />
+    <association property="teacher" javaType="com.pxxy.bigData.bean.Teacher">
+    	<id property="teacherId" column="teacher_id"/>
+    	<result property="teacherCode" column="teacher_code"/>
+    	<result property="teacherName" column="teacher_name"/>
+    </association>
+    <association property="classify" javaType="com.pxxy.bigData.bean.Classify">
+    	<id property="classifyId" column="classify_id"/>
+    	<result property="classifyCode" column="classify_code"/>
+    	<result property="classifyName" column="classify_name"/>
+    </association>
+    <association property="video" javaType="com.pxxy.bigData.bean.Video">
+    	<id property="videoId" column="video_id"/>
+    	<result property="videoCode" column="video_code"/>
+    	<result property="videoUrl" column="video_url"/>
+    </association>
+    <association property="praise" javaType="com.pxxy.bigData.bean.Praise">
+    	<id property="praiseId" column="parise_id"/>
+    	<result property="userId" column="user_id"/>
+    	<result property="courseId" column="course_id"/>
+    </association>
+  </resultMap>
+  <sql id="Base_Column_List">
+    course_id, course_name, course_introduction, teacher_id, course_img_url, classify_id, 
+    video_id, uploadDate, praiseCount, classic
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_course
+    where course_id = #{courseId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_course
+    where course_id = #{courseId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.pxxy.bigData.bean.Course">
+    insert into t_course (course_id, course_name, course_introduction, 
+      teacher_id, course_img_url, classify_id, 
+      video_id, uploadDate, praiseCount, 
+      classic)
+    values (#{courseId,jdbcType=INTEGER}, #{courseName,jdbcType=VARCHAR}, #{courseIntroduction,jdbcType=VARCHAR}, 
+      #{teacherId,jdbcType=INTEGER}, #{courseImgUrl,jdbcType=VARCHAR}, #{classifyId,jdbcType=INTEGER}, 
+      #{videoId,jdbcType=INTEGER}, #{uploaddate,jdbcType=DATE}, #{praisecount,jdbcType=INTEGER}, 
+      #{classic,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.pxxy.bigData.bean.Course">
+    insert into t_course
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="courseId != null">
+        course_id,
+      </if>
+      <if test="courseName != null">
+        course_name,
+      </if>
+      <if test="courseIntroduction != null">
+        course_introduction,
+      </if>
+      <if test="teacherId != null">
+        teacher_id,
+      </if>
+      <if test="courseImgUrl != null">
+        course_img_url,
+      </if>
+      <if test="classifyId != null">
+        classify_id,
+      </if>
+      <if test="videoId != null">
+        video_id,
+      </if>
+      <if test="uploaddate != null">
+        uploadDate,
+      </if>
+      <if test="praisecount != null">
+        praiseCount,
+      </if>
+      <if test="classic != null">
+        classic,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="courseId != null">
+        #{courseId,jdbcType=INTEGER},
+      </if>
+      <if test="courseName != null">
+        #{courseName,jdbcType=VARCHAR},
+      </if>
+      <if test="courseIntroduction != null">
+        #{courseIntroduction,jdbcType=VARCHAR},
+      </if>
+      <if test="teacherId != null">
+        #{teacherId,jdbcType=INTEGER},
+      </if>
+      <if test="courseImgUrl != null">
+        #{courseImgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="classifyId != null">
+        #{classifyId,jdbcType=INTEGER},
+      </if>
+      <if test="videoId != null">
+        #{videoId,jdbcType=INTEGER},
+      </if>
+      <if test="uploaddate != null">
+        #{uploaddate,jdbcType=DATE},
+      </if>
+      <if test="praisecount != null">
+        #{praisecount,jdbcType=INTEGER},
+      </if>
+      <if test="classic != null">
+        #{classic,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pxxy.bigData.bean.Course">
+    update t_course
+    <set>
+      <if test="courseName != null">
+        course_name = #{courseName,jdbcType=VARCHAR},
+      </if>
+      <if test="courseIntroduction != null">
+        course_introduction = #{courseIntroduction,jdbcType=VARCHAR},
+      </if>
+      <if test="teacherId != null">
+        teacher_id = #{teacherId,jdbcType=INTEGER},
+      </if>
+      <if test="courseImgUrl != null">
+        course_img_url = #{courseImgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="classifyId != null">
+        classify_id = #{classifyId,jdbcType=INTEGER},
+      </if>
+      <if test="videoId != null">
+        video_id = #{videoId,jdbcType=INTEGER},
+      </if>
+      <if test="uploaddate != null">
+        uploadDate = #{uploaddate,jdbcType=DATE},
+      </if>
+      <if test="praisecount != null">
+        praiseCount = #{praisecount,jdbcType=INTEGER},
+      </if>
+      <if test="classic != null">
+        classic = #{classic,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where course_id = #{courseId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pxxy.bigData.bean.Course">
+    update t_course
+    set course_name = #{courseName,jdbcType=VARCHAR},
+      course_introduction = #{courseIntroduction,jdbcType=VARCHAR},
+      teacher_id = #{teacherId,jdbcType=INTEGER},
+      course_img_url = #{courseImgUrl,jdbcType=VARCHAR},
+      classify_id = #{classifyId,jdbcType=INTEGER},
+      video_id = #{videoId,jdbcType=INTEGER},
+      uploadDate = #{uploaddate,jdbcType=DATE},
+      praiseCount = #{praisecount,jdbcType=INTEGER},
+      classic = #{classic,jdbcType=VARCHAR}
+    where course_id = #{courseId,jdbcType=INTEGER}
+  </update>
+  <select id="selectAllCourse" resultMap="BaseResultMap">
+  	select 
+    c.*,t.teacher_name,f.classify_name,v.video_url
+    from t_course c
+		LEFT JOIN t_video v on c.video_id=v.video_id
+		LEFT JOIN t_classify f on c.classify_id=f.classify_id
+    left join t_teacher t on c.teacher_id=t.teacher_id
+  </select>
+  <select id = "findClassic" resultMap="BaseResultMap">
+  	select c.*,t.teacher_name,v.video_url
+  	from t_course c
+  	left join t_teacher t on c.teacher_id = t.teacher_id
+  	left join t_video v on c.video_id = v.video_id
+  	where classic = 1
+  </select>
+  <select id = "selectInfo" resultMap="BaseResultMap">
+  	select * from t_course where course_name = #{courseName,jdbcType=VARCHAR},
+  </select>
+  <select id = "getCourseInfo" resultMap="BaseResultMap" parameterType="Integer">
+  		select 
+    	c.*,t.teacher_name,v.video_url,COUNT(*)
+    	from t_course c
+		LEFT JOIN t_praise p on c.course_id=p.course_id
+		left join t_teacher t on c.teacher_id = t.teacher_id
+    	left join t_video v on c.video_id = v.video_id
+		where c.course_id = #{id,jdbcType=INTEGER}
+   </select>
+  <select id="getClassify" resultMap="BaseResultMap" parameterType="Integer">
+  		select c.* from
+		t_course c
+		left join t_classify f on f.classify_id = c.classify_id 
+		where f.classify_id=#{classifyId,jdbcType=INTEGER}
+  </select>
+  <select id="search" parameterType="java.lang.String" resultMap="BaseResultMap">
+ 	SELECT c.*,t.teacher_name,f.classify_name,v.video_url
+    from t_course c
+		LEFT JOIN t_video v on c.video_id=v.video_id
+		LEFT JOIN t_classify f on c.classify_id=f.classify_id
+    	left join t_teacher t on c.teacher_id=t.teacher_id
+		WHERE course_name like CONCAT('%',#{input,jdbcType=VARCHAR},'%')
+  	</select>
+	<select id="selectTeacherId" parameterType="string" resultType="java.lang.Integer">
+  	SELECT DISTINCT c.teacher_id 
+		FROM `t_course` c
+		LEFT JOIN t_teacher t ON c.teacher_id = t.teacher_id
+		WHERE t.teacher_name LIKE CONCAT('%',#{input},'%')
+  	</select>
+	<select id="selectByTeacherId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+ 	SELECT *
+		FROM `t_course` 
+		WHERE teacher_id = #{teacherId}
+  	</select>
+</mapper>

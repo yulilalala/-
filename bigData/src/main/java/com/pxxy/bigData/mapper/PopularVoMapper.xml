@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pxxy.bigData.mapper.PopularVoMapper">
+    <select id = "selectTop10Popular" resultType="com.pxxy.bigData.bean.PopularVo">
+  		select a.course_id,course_name,a.course_img_url,count(*) cnt 
+  		from t_course a left join t_collection b on a.course_id=b.course_id group by course_id order by cnt desc limit 10
+  </select>
+   <select id = "selectTop20Popular" resultType="com.pxxy.bigData.bean.PopularVo">
+  		select a.course_id,course_name,a.course_img_url,count(*) cnt 
+  		from t_course a left join t_collection b on a.course_id=b.course_id group by course_id order by cnt desc limit 20
+  </select>
+  
+  <select id = "selectPopular" resultType="com.pxxy.bigData.bean.PopularVo">
+  		select a.course_id,course_name,a.course_img_url,count(*) cnt 
+  		from t_course a left join t_collection b on a.course_id=b.course_id group by course_id order by cnt desc 
+  </select>
+</mapper>

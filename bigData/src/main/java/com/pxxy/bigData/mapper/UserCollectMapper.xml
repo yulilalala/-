@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pxxy.bigData.mapper.UserCollectMapper">
+  <resultMap id="BaseResultMap" type="com.pxxy.bigData.bean.UserCollect">
+    <id column="user_collect_id" jdbcType="INTEGER" property="userCollectId" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="course_id" jdbcType="INTEGER" property="courseId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    user_collect_id, user_id, course_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_usercollect
+    where user_collect_id = #{userCollectId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_usercollect
+    where user_collect_id = #{userCollectId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.pxxy.bigData.bean.UserCollect">
+    insert into t_usercollect (user_collect_id, user_id, course_id
+      )
+    values (#{userCollectId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{courseId,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.pxxy.bigData.bean.UserCollect">
+    insert into t_usercollect
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userCollectId != null">
+        user_collect_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="courseId != null">
+        course_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userCollectId != null">
+        #{userCollectId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="courseId != null">
+        #{courseId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pxxy.bigData.bean.UserCollect">
+    update t_usercollect
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="courseId != null">
+        course_id = #{courseId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where user_collect_id = #{userCollectId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pxxy.bigData.bean.UserCollect">
+    update t_usercollect
+    set user_id = #{userId,jdbcType=INTEGER},
+      course_id = #{courseId,jdbcType=INTEGER}
+    where user_collect_id = #{userCollectId,jdbcType=INTEGER}
+  </update>
+  <insert id="insertCollectSelective" parameterType="int">
+   	 insert into t_usercollect (user_id, course_id)
+    		values (#{userId,jdbcType=INTEGER}, #{courseId,jdbcType=INTEGER})
+  	</insert>
+  	<select id="selectCourseId" resultType="int">
+  	select course_id from t_usercollect where user_id=#{userId}
+  	</select>
+  	<select id="selectPrimaryKey" parameterType="int" resultType="java.lang.Integer">
+  	select user_collect_id 
+  		from t_usercollect 
+  		WHERE user_id=#{userId} and course_id=#{courseId}
+  	</select>
+  	<select id="selectById" parameterType="int" resultMap="BaseResultMap">
+  		select *
+  		from t_usercollect 
+  		WHERE user_id=#{userId} and course_id=#{courseId}
+  	</select>
+</mapper>
